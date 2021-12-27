@@ -2,8 +2,8 @@
  - [x] auditing
  - [x] cors
  - [ ] csrf
- - [ ] exception
- - [ ] api result
+ - [x] exception
+ - [x] api result
  - [ ] dto to entity
 
 ## auditing
@@ -31,4 +31,35 @@ https://docs.spring.io/spring-security/site/docs/4.2.x/reference/html/cors.html
 https://docs.spring.io/spring-security/site/docs/4.2.x/reference/html/csrf.html
 ## security
 
-getUser
+
+
+## JUnit 5 Jupiter
+In JUnit 5 the package name has changed and the Assertions are at org.junit.jupiter.api.Assertions and Assumptions at org.junit.jupiter.api.Assumptions
+
+So you have to add the following static import:
+
+```java
+import static org.junit.jupiter.api.Assertions.*;
+```
+See also http://junit.org/junit5/docs/current/user-guide/#writing-tests-assertions
+
+
+## Exception
+
+```json
+{
+  "code": 405,
+  "status": "fail",
+  "data": "MethodNotAllowed",
+  "message": "Request method 'GET' not supported"
+}
+```
+```json
+{
+  "timestamp": "2021-12-27T07:12:40.562+00:00",
+  "status": 405,
+  "error": "Method Not Allowed",
+  "message": "Request method 'GET' not supported",
+  "path": "/users/"
+}
+```

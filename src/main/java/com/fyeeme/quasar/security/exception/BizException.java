@@ -1,4 +1,4 @@
-package com.fyeeme.quasar.configure.exception;
+package com.fyeeme.quasar.security.exception;
 
 import org.springframework.http.HttpStatus;
 import lombok.Getter;
@@ -11,6 +11,12 @@ public class BizException extends RuntimeException {
 
     public BizException(ErrorCode error) {
         super(error.getCode());
+        this.code = error.getCode();
+        this.status = error.getStatus();
+    }
+
+    public BizException(ErrorCode error, String message) {
+        super(message);
         this.code = error.getCode();
         this.status = error.getStatus();
     }

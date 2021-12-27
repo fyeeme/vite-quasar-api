@@ -1,4 +1,4 @@
-package com.fyeeme.quasar.configure;
+package com.fyeeme.quasar.security;
 
 import com.fyeeme.quasar.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

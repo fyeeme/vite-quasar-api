@@ -14,6 +14,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Role extends BaseEntity {
+    public static final String USER = "user";
     private String name;
     private String code;
     @ManyToMany(fetch = FetchType.LAZY)
