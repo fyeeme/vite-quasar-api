@@ -1,21 +1,16 @@
 package com.fyeeme.quasar.user.entity;
 
 import com.fyeeme.quasar.base.entity.Auditable;
-import com.fyeeme.quasar.base.entity.BaseEntity;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+
+import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
-import lombok.Getter;
-import lombok.Setter;
 
 @Entity
 @Getter
@@ -40,13 +35,11 @@ public class User extends Auditable<Long> implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // @formatter:off
         var privileges = roles.stream()
             .map(Role::getPrivileges)
             .flatMap(Collection::stream)
             .map(Privilege::getCode)
             .collect(Collectors.toSet());
-        // @formatter:on
         return privileges.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toSet());
     }
 

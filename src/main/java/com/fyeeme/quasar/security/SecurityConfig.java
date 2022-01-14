@@ -1,17 +1,23 @@
 package com.fyeeme.quasar.security;
 
-import com.fyeeme.quasar.user.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.fyeeme.quasar.security.handler.AuthenticationHandler;
+import com.fyeeme.quasar.user.entity.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
 import java.util.Arrays;
 
 @Configuration
@@ -19,8 +25,13 @@ import java.util.Arrays;
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class SecurityConfig {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+    private final AuthenticationHandler authenticationHandler;
+
+    public SecurityConfig(AuthenticationHandler authenticationHandler, UserService userService) {
+        this.userService = userService;
+        this.authenticationHandler = authenticationHandler;
+    }
 
     @Bean
     public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
@@ -46,6 +57,26 @@ public class SecurityConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
+    }
+
+    @Bean
+    PasswordEncoder encoder() {
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    }
+
+    @Bean
+    AuthenticationSuccessHandler successHandler() {
+        return authenticationHandler;
+    }
+
+    @Bean
+    AuthenticationFailureHandler failureHandler() {
+        return authenticationHandler;
+    }
+
+    @Bean
+    LogoutSuccessHandler logoutHandler() {
+        return authenticationHandler;
     }
 
 

@@ -1,17 +1,20 @@
-package com.fyeeme.quasar.user.service;
+package com.fyeeme.quasar.user.entity.service;
 
-import com.fyeeme.quasar.base.entity.BaseFilter;
+import com.fyeeme.quasar.base.repository.dto.QueryCondition;
 import com.fyeeme.quasar.user.entity.User;
 import com.fyeeme.quasar.user.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
-    private UserRepository repository;
+    private final UserRepository repository;
+
+    public UserServiceImpl(UserRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     public User create(User user) {
@@ -33,7 +36,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public List<User> listAll(BaseFilter filter) {
+    public List<User> listAll(QueryCondition filter) {
         return repository.findAll();
     }
 

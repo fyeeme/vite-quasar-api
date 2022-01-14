@@ -72,9 +72,7 @@ public class UnifiedExceptionHandler {
         var httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
 
         var apiError = ApiError.builder().code(httpStatus.value())
-                // MethodNotAllowed ->
-                //CaseConverter.convertToCamelCase(httpStatus.getReasonPhrase())
-                .status(ApiError.FAIL).data(httpStatus.getReasonPhrase())
+                .status(ApiError.FAIL).data(CaseConverter.convertToCamelCase(httpStatus.getReasonPhrase()))
                 .message(getErrorMessage(e)).build();
         return new ResponseEntity<>(apiError, httpStatus);
     }
@@ -118,8 +116,7 @@ public class UnifiedExceptionHandler {
         var httpStatus = errorResponse.getStatus();
 
         var apiError = ApiError.builder().code(httpStatus.value())
-                //CaseConverter.convertToCamelCase(httpStatus.getReasonPhrase())
-                .status(ApiError.FAIL).data(httpStatus.getReasonPhrase())
+                .status(ApiError.FAIL).data(CaseConverter.convertToCamelCase(httpStatus.getReasonPhrase()))
                 .message(getErrorMessage(e)).build();
         return new ResponseEntity<>(apiError, httpStatus);
     }

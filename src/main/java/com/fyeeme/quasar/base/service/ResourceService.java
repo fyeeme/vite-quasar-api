@@ -1,13 +1,14 @@
 package com.fyeeme.quasar.base.service;
 
 import com.fyeeme.quasar.base.entity.BaseEntity;
-import com.fyeeme.quasar.base.entity.BaseFilter;
+import com.fyeeme.quasar.base.repository.dto.QueryCondition;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+
 import java.util.List;
 
-public interface CrudService<T extends BaseEntity, F extends BaseFilter> {
+public interface ResourceService<T extends BaseEntity, F extends QueryCondition> {
     default T create(T t) {
         return null;
     }
@@ -43,6 +44,6 @@ public interface CrudService<T extends BaseEntity, F extends BaseFilter> {
      * 返回默认的Page对象: ID DESC
      */
     default Pageable toPageRequest(F f) {
-        return PageRequest.of(f.getPage(), f.getPageSize(), f.getSortDirection(), f.getSortField());
+        return PageRequest.of(f.getPage(), f.getPageSize());
     }
 }
