@@ -5,7 +5,7 @@ import com.fyeeme.quasar.security.exception.AssertEntity;
 import com.fyeeme.quasar.security.exception.ErrorCode;
 import com.fyeeme.quasar.user.entity.Role;
 import com.fyeeme.quasar.user.entity.User;
-import com.fyeeme.quasar.user.entity.service.UserService;
+import com.fyeeme.quasar.user.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.PermitAll;

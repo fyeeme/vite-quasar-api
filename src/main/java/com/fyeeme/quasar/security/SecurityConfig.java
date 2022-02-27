@@ -1,7 +1,7 @@
 package com.fyeeme.quasar.security;
 
 import com.fyeeme.quasar.security.handler.AuthenticationHandler;
-import com.fyeeme.quasar.user.entity.service.UserService;
+import com.fyeeme.quasar.user.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -23,15 +23,8 @@ import java.util.Arrays;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
-public class SecurityConfig {
-
-    private final UserService userService;
-    private final AuthenticationHandler authenticationHandler;
-
-    public SecurityConfig(AuthenticationHandler authenticationHandler, UserService userService) {
-        this.userService = userService;
-        this.authenticationHandler = authenticationHandler;
-    }
+public record SecurityConfig(AuthenticationHandler authenticationHandler,
+                             UserService userService) {
 
     @Bean
     public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
@@ -41,7 +34,7 @@ public class SecurityConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return username -> userService.getByUsername(username);
+        return userService::getByUsername;
     }
 
     /**

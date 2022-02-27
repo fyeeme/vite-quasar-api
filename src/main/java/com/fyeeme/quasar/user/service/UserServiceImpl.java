@@ -1,4 +1,4 @@
-package com.fyeeme.quasar.user.entity.service;
+package com.fyeeme.quasar.user.service;
 
 import com.fyeeme.quasar.base.repository.dto.QueryCondition;
 import com.fyeeme.quasar.user.entity.User;

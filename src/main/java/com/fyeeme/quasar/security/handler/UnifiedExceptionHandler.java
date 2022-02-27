@@ -110,7 +110,7 @@ public class UnifiedExceptionHandler {
 
             ServletRequestBindingException.class,
     })
-//    @ResponseBody
+    @ResponseBody
     public ResponseEntity<Object> handleServletException(Exception e) {
         var errorResponse = ResponseEnum.valueOf(CaseConverter.convertToUpperSnakeCase(e.getClass().getSimpleName()));
         var httpStatus = errorResponse.getStatus();
