@@ -40,6 +40,30 @@ public interface ResourceService<T extends BaseEntity, F extends QueryCondition>
         return null;
     }
 
+    // another way of naming create method
+    // default T join(T t) {
+    //     return null;
+    // }
+
+    // another way of naming delete method
+    // default T quit(Long id) {
+    //     return null;
+    // }
+
+    // some other operate of naming method
+    // default T publish(Long id) {
+    //     return null;
+    // }
+
+    // default T undoPublish(Long id) {
+    //     return null;
+    // }
+
+    // default T hits(Long id) {
+    //     return null;
+    // }
+
+
     /**
      * 返回默认的Page对象: ID DESC
      */
