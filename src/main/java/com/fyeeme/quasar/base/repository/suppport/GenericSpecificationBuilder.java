@@ -9,6 +9,9 @@ import org.springframework.util.CollectionUtils;
 import javax.persistence.criteria.*;
 import java.util.ArrayList;
 
+/**
+ * https://self-learning-java-tutorial.blogspot.com/2020/08/spring-jpa-specification-to-join-tables.html
+ */
 public class GenericSpecificationBuilder {
 
     public static <T> Specification<T> buildSpecs(QueryCondition filterQuery, Class<T> clazz) {

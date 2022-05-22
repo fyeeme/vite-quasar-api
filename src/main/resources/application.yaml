@@ -1,0 +1,37 @@
+server:
+  port: 8600
+spring:
+  datasource:
+    password: root
+    url: jdbc:mysql://127.0.0.1:3306/quasar
+    username: root
+  flyway:
+    baseline-on-migrate: true
+    out-of-order: true
+    validate-on-migrate: false
+  jpa:
+    open-in-view: false
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+    web: DEBUG
+management:
+  endpoints:
+    web:
+      base-path: /manage
+      exposure:
+        include: '*'
+
+# custom properties
+quasar:
+  service:
+    security:
+      username: "admin"
+      roles:
+        - "USER"
+        - "ADMIN"
+    enabled: true
+    url: 192.168.1.1

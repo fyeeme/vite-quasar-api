@@ -20,11 +20,18 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Arrays;
 
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
-public record SecurityConfig(AuthenticationHandler authenticationHandler,
-                             UserService userService) {
+public class SecurityConfig {
+
+    private final AuthenticationHandler authenticationHandler;
+    private final UserService userService;
+
+    public SecurityConfig(AuthenticationHandler authenticationHandler, UserService userService) {
+        this.authenticationHandler = authenticationHandler;
+        this.userService = userService;
+    }
 
     @Bean
     public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
