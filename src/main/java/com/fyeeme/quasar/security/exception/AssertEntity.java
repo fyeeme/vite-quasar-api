@@ -22,16 +22,22 @@ public class AssertEntity {
      * @param object    需要检查的对象
      * @param errorCode 错误信息
      */
-    public static void notNull(Object object, ErrorCode errorCode) {
+    public static void notNull(Object object, Err errorCode) {
         if (object == null) {
             throw new BizException(errorCode);
         }
     }
 
 
-    public static void notNull(Object object, ErrorCode errorCode, String message) {
+    public static void notNull(Object object, Err errorCode, String message) {
         if (object == null) {
             throw new BizException(errorCode, message);
+        }
+    }
+
+    public static void notNull(Object object, Err module, Err error) {
+        if (object == null) {
+            throw new BizException(module, error);
         }
     }
 
@@ -41,13 +47,13 @@ public class AssertEntity {
      * @param collection 需要检查的对象
      * @param errorCode  错误信息
      */
-    public static void notEmpty(Collection<?> collection, ErrorCode errorCode) {
+    public static void notEmpty(Collection<?> collection, Err errorCode) {
         if (CollectionUtils.isEmpty(collection)) {
             throw new BizException(errorCode);
         }
     }
 
-    public static void notEmpty(Collection<?> collection, ErrorCode errorCode, String message) {
+    public static void notEmpty(Collection<?> collection, Err errorCode, String message) {
         if (CollectionUtils.isEmpty(collection)) {
             throw new BizException(errorCode, message);
         }
@@ -59,13 +65,13 @@ public class AssertEntity {
      * @param text      需要检查的对象
      * @param errorCode 错误信息
      */
-    public static void hasText(String text, ErrorCode errorCode) {
+    public static void hasText(String text, Err errorCode) {
         if (!StringUtils.hasText(text)) {
             throw new BizException(errorCode);
         }
     }
 
-    public static void hasText(String text, ErrorCode errorCode, String message) {
+    public static void hasText(String text, Err errorCode, String message) {
         if (!StringUtils.hasText(text)) {
             throw new BizException(errorCode, message);
         }
@@ -77,13 +83,13 @@ public class AssertEntity {
      * @param expression 需要检查的对象
      * @param errorCode  错误信息
      */
-    public static void isTrue(boolean expression, ErrorCode errorCode) {
+    public static void isTrue(boolean expression, Err errorCode) {
         if (!expression) {
             throw new BizException(errorCode);
         }
     }
 
-    public static void isTrue(String text, ErrorCode errorCode, String message) {
+    public static void isTrue(String text, Err errorCode, String message) {
         if (!StringUtils.hasText(text)) {
             throw new BizException(errorCode, message);
         }

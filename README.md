@@ -63,3 +63,9 @@ See also http://junit.org/junit5/docs/current/user-guide/#writing-tests-assertio
   "path": "/users/"
 }
 ```
+
+## custom profile with gradle bootRun
+
+```shell
+ gradle bootRun  --args='--spring.profiles.active=test -sprot=9000'
+```

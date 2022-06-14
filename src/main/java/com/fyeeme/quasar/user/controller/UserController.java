@@ -2,7 +2,7 @@ package com.fyeeme.quasar.user.controller;
 
 import com.fyeeme.quasar.base.repository.dto.QueryCondition;
 import com.fyeeme.quasar.security.exception.AssertEntity;
-import com.fyeeme.quasar.security.exception.ErrorCode;
+import com.fyeeme.quasar.security.exception.CommonError;
 import com.fyeeme.quasar.user.entity.Role;
 import com.fyeeme.quasar.user.entity.User;
 import com.fyeeme.quasar.user.service.UserService;
@@ -25,13 +25,14 @@ public class UserController {
 
     @PostMapping()
     public User create(@RequestBody User user) {
-        AssertEntity.notNull(null, ErrorCode.USER_DISABLED, "User has been disabled");
+        AssertEntity.notNull(null, CommonError.USER, CommonError.DISABLED);
+
         var savedUser = userService.create(user);
         return savedUser;
     }
 
     @PutMapping()
-    @RolesAllowed({ Role.USER })
+    @RolesAllowed({Role.USER})
     public User update(@RequestBody User user) {
         var savedUser = userService.update(user);
         return savedUser;
@@ -39,7 +40,7 @@ public class UserController {
 
     @GetMapping("/{id}")
     public User get(@PathVariable Long id) {
-        AssertEntity.notNull(null, ErrorCode.USER_NOT_FOUND);
+        AssertEntity.notNull(null, CommonError.USER, CommonError.NOT_FOUND);
         return null;
     }
 

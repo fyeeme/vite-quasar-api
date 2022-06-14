@@ -91,7 +91,7 @@ public class GenericSpecificationBuilder {
             case LIKE -> predicates.add(builder.like(expression, "%" + condition.getValue() + "%"));
             case IN -> predicates.add(builder.in(expression).value(condition.getValue()));
             case LESS_THAN -> predicates.add(builder.lessThan(expression, (Comparable) condition.getValue()));
-            case LESSTHAN_OR_EQUAL_TO -> predicates.add(builder.lessThanOrEqualTo(expression, (Comparable) condition.getValue()));
+            case LESS_THAN_OR_EQUAL_TO -> predicates.add(builder.lessThanOrEqualTo(expression, (Comparable) condition.getValue()));
             case GREATER_THAN -> predicates.add(builder.greaterThan(expression, (Comparable) condition.getValue()));
             case GREATER_THAN_OR_EQUAL_TO -> predicates.add(builder.greaterThanOrEqualTo(expression, (Comparable) condition.getValue()));
             case NOT_EQUAL -> predicates.add(builder.notEqual(expression, condition.getValue()));

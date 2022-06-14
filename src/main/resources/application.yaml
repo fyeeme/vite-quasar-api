@@ -1,10 +1,6 @@
-server:
-  port: 8600
 spring:
-  datasource:
-    password: root
-    url: jdbc:mysql://127.0.0.1:3306/quasar
-    username: root
+  application:
+    name: quasar-api
   flyway:
     baseline-on-migrate: true
     out-of-order: true
@@ -17,21 +13,11 @@ logging:
     org:
       springframework:
         security: DEBUG
-    web: DEBUG
-management:
-  endpoints:
-    web:
-      base-path: /manage
-      exposure:
-        include: '*'
+    web: TRACE
 
-# custom properties
-quasar:
-  service:
-    security:
-      username: "admin"
-      roles:
-        - "USER"
-        - "ADMIN"
-    enabled: true
-    url: 192.168.1.1
+---
+
+spring:
+  profiles:
+    # 选择环境
+    active: prod

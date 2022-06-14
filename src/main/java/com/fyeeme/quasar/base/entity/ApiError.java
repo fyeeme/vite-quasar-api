@@ -1,22 +1,27 @@
 package com.fyeeme.quasar.base.entity;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.io.Serial;
-import java.io.Serializable;
-
 @Getter
 @Setter
-@Builder
-public class ApiError implements Serializable {
-    public static final String FAIL = "fail";
-    @Serial
-    private static final long serialVersionUID = -3585800028253838082L;
-
-    private Integer code;
+public class ApiError<T> {
+    private static final String FAIL = "fail";
+    // TODO if error occurred when validate entity, errors may be list.
+    // private List<String> data;
+    private T data;
+    private String code;
     private String status;
-    private Object data;
     private String message;
+
+    private ApiError(T data, String message, String code) {
+        this.data = data;
+        this.status = FAIL;
+        this.code = code;
+        this.message = message;
+    }
+
+    public static <T> ApiError<T> of(T data, String message, String code) {
+        return new ApiError<>(data, message, code);
+    }
 }

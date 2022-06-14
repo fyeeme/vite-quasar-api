@@ -5,7 +5,6 @@ import com.fyeeme.quasar.base.entity.ApiError;
 import com.fyeeme.quasar.base.entity.ApiResult;
 import com.fyeeme.quasar.user.entity.User;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -22,7 +21,7 @@ import java.io.IOException;
 @Component
 public class AuthenticationHandler implements AuthenticationSuccessHandler, AuthenticationFailureHandler, LogoutSuccessHandler {
 
-    private  final ObjectMapper objectMapper;
+    private final ObjectMapper objectMapper;
 
     public AuthenticationHandler(ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
@@ -36,10 +35,8 @@ public class AuthenticationHandler implements AuthenticationSuccessHandler, Auth
         }
         var principal = (User) authentication.getPrincipal();
 
-        var apiResult = ApiResult.builder()
-                .code(HttpStatus.OK.value())
-                .status(ApiResult.SUCCESS)
-                .data(principal).build();
+        var apiResult = ApiResult.of(principal);
+
 
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.setCharacterEncoding("utf-8");
@@ -53,11 +50,7 @@ public class AuthenticationHandler implements AuthenticationSuccessHandler, Auth
             return;
         }
         //状态OK, 数据提示登陆失败
-        var apiResult = ApiError.builder()
-                .code(HttpStatus.OK.value())
-                .status(ApiError.FAIL)
-                .data(exception.getClass().getSimpleName())
-                .message(exception.getMessage()).build();
+        var apiResult = ApiError.of(exception.getClass().getSimpleName(), "400", exception.getMessage());
         log.error("Login failed: {}", exception.getMessage(), exception);
 
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
@@ -73,10 +66,7 @@ public class AuthenticationHandler implements AuthenticationSuccessHandler, Auth
             log.debug("Response has already been committed");
             return;
         }
-        var apiResult = ApiResult.builder()
-                .code(HttpStatus.OK.value())
-                .status(ApiResult.SUCCESS)
-                .data(true).build();
+        var apiResult = ApiResult.of(true);
 
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.setCharacterEncoding("utf-8");
