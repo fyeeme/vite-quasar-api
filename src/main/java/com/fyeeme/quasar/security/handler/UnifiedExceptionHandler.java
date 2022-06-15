@@ -38,7 +38,6 @@ public class UnifiedExceptionHandler extends ResponseEntityExceptionHandler {
      */
     @ExceptionHandler(value = BizException.class)
     public ResponseEntity<Object> handleBizException(BizException ex, WebRequest request) {
-//        return new ResponseEntity<>(ApiError.of(getErrorMessage(ex), ex.getMessage(), ex.getCode()), HttpStatus.OK);
         return buildResponseEntity(ex, ex.getMessage(), ex.getCode());
     }
 
@@ -52,7 +51,6 @@ public class UnifiedExceptionHandler extends ResponseEntityExceptionHandler {
     @ResponseBody
     public ResponseEntity<Object> handleRuntimeException(Exception ex, WebRequest request) {
         var httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
-//        return new ResponseEntity<>(ApiError.of(getErrorMessage(ex), httpStatus.name(), String.valueOf(httpStatus.value())), HttpStatus.OK);
         return buildResponseEntity(ex, httpStatus.name(), String.valueOf(httpStatus.value()));
     }
 
@@ -91,7 +89,6 @@ public class UnifiedExceptionHandler extends ResponseEntityExceptionHandler {
         if (HttpStatus.INTERNAL_SERVER_ERROR.equals(status)) {
             request.setAttribute(WebUtils.ERROR_EXCEPTION_ATTRIBUTE, ex, WebRequest.SCOPE_REQUEST);
         }
-//        return new ResponseEntity<>(ApiError.of(getErrorMessage(ex), status.getReasonPhrase(), String.valueOf(status.value())), HttpStatus.OK);
         return buildResponseEntity(ex, status.getReasonPhrase(), String.valueOf(status.value()));
     }
 

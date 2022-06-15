@@ -16,9 +16,9 @@ public class ApiError<T> {
 
     private ApiError(T data, String message, String code) {
         this.data = data;
-        this.status = FAIL;
         this.code = code;
         this.message = message;
+        this.status = FAIL;
     }
 
     public static <T> ApiError<T> of(T data, String message, String code) {

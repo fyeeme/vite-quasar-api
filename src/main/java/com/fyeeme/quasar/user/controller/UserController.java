@@ -25,8 +25,9 @@ public class UserController {
 
     @PostMapping()
     public User create(@RequestBody User user) {
-        AssertEntity.notNull(null, CommonError.USER, CommonError.DISABLED);
-
+//        AssertEntity.notNull(null,CommonError.USER,  CommonError.DISABLED);
+        long count = 10;
+        var average = count / 0;
         var savedUser = userService.create(user);
         return savedUser;
     }

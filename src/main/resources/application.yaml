@@ -20,4 +20,4 @@ logging:
 spring:
   profiles:
     # 选择环境
-    active: prod
+    active: dev

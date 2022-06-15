@@ -25,3 +25,8 @@ Content-Type: application/json
   "page": "1",
   "pageSize": "10"
 }
+
+###
+
+DELETE http://localhost:8600 HTTP/1.1
+Content-Type: application/json

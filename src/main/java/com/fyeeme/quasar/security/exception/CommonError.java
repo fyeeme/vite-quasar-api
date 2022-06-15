@@ -40,7 +40,7 @@ public enum CommonError implements Err {
     ALREADY_JOINED("409", " Already Joined"),
     NOT_STARTED("409", " Not Start"),
     ALREADY_FINISHED("409", " Already Finished"),
-    DISABLED("403", " Disabled"),
+    DISABLED("403", "Disabled"),
 
 
     //Module
