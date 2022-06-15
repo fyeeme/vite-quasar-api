@@ -69,3 +69,20 @@ See also http://junit.org/junit5/docs/current/user-guide/#writing-tests-assertio
 ```shell
  gradle bootRun  --args='--spring.profiles.active=test -sprot=9000'
 ```
+
+
+## Open-in-view
+
+https://www.baeldung.com/hibernate-initialize-proxy-exception
+
+```text
+Using Join Fetching
+We can also use a JOIN FETCH directive in JPQL to fetch the associated collection on-demand:
+
+SELECT u FROM User u JOIN FETCH u.roles
+
+Or we can use the Hibernate Criteria API:
+
+Criteria criteria = session.createCriteria(User.class);
+criteria.setFetchMode("roles", FetchMode.EAGER);
+```

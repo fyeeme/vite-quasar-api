@@ -26,7 +26,7 @@ public interface ResourceService<T extends BaseEntity, F extends QueryCondition>
      * If a DELETE request includes an entity body, the body is ignored [...]
      *
      * @param id
-     * @return T t
+     * @return T
      */
     default T delete(Long id) {
         return null;

@@ -1,0 +1,11 @@
+CREATE TABLE `message` (
+   `id` INT NOT NULL AUTO_INCREMENT COMMENT '用户ID',
+   `title` VARCHAR(64) CHARACTER SET utf8mb4 NOT NULL COMMENT '用户名',
+   `content` VARCHAR(64) CHARACTER SET utf8mb4  DEFAULT NULL COMMENT '用户昵称',
+   `received_by` INT DEFAULT NULL COMMENT '接受消息的用户ID',
+   `created_by` INT DEFAULT NULL COMMENT '创建者用户ID',
+   `modified_by` INT DEFAULT NULL COMMENT '修改者用户ID',
+   `created_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '最后更新时间',
+   `modified_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '最后更新时间',
+   PRIMARY KEY (`id`)
+) COMMENT '私信表';

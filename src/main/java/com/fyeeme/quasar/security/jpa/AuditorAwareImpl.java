@@ -1,19 +1,23 @@
 package com.fyeeme.quasar.security.jpa;
 
+import com.fyeeme.quasar.user.entity.User;
 import org.springframework.data.domain.AuditorAware;
+import org.springframework.security.core.context.SecurityContextHolder;
 
+import java.util.Objects;
 import java.util.Optional;
 
 public class AuditorAwareImpl implements AuditorAware<Long> {
 
     @Override
     public Optional<Long> getCurrentAuditor() {
-        return Optional.of(1L);
-        // Can use Spring Security to return currently logged in user
+        var authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        // return Optional.ofNullable(SecurityContextHolder.getContext())
-        // .map(SecurityContext::getAuthentication).filter(Authentication::isAuthenticated)
-        // .map(Authentication::getPrincipal).map(User.class::cast);
+        if (Objects.isNull(authentication) || !authentication.isAuthenticated()) {
+            return Optional.empty();
+        }
+        var currentUser = (User) authentication.getPrincipal();
+        return Optional.of(currentUser.getId());
     }
 
 }

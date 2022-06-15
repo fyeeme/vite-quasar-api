@@ -18,7 +18,9 @@ import org.springframework.web.util.WebUtils;
 
 import java.util.Arrays;
 
-
+/**
+ * https://devwithus.com/exception-handling-spring-boot-rest-api/
+ */
 @Slf4j
 @ControllerAdvice
 public class UnifiedExceptionHandler extends ResponseEntityExceptionHandler {
@@ -94,7 +96,7 @@ public class UnifiedExceptionHandler extends ResponseEntityExceptionHandler {
 
 
     private String getErrorMessage(Exception ex) {
-        log.info("Process error message for env: {} - {}", environment.getActiveProfiles(), ex.getMessage());
+        log.error("Process error message for env: {} - {}", environment.getActiveProfiles(), ex.getMessage());
         // only show detail msg in dev env.
         var data = ex.getLocalizedMessage();
         var isProdEnv = Arrays.asList(environment.getActiveProfiles()).contains(ENV_PROD);

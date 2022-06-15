@@ -89,8 +89,14 @@ public class AssertEntity {
         }
     }
 
-    public static void isTrue(String text, Err errorCode, String message) {
-        if (!StringUtils.hasText(text)) {
+    public static void isTrue(boolean expression, Err module, Err error) {
+        if (!expression) {
+            throw new BizException(module, error);
+        }
+    }
+
+    public static void isTrue(boolean expression, Err errorCode, String message) {
+        if (!expression) {
             throw new BizException(errorCode, message);
         }
     }

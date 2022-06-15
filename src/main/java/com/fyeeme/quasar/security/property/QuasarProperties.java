@@ -1,4 +1,4 @@
-package com.fyeeme.quasar.security.config;
+package com.fyeeme.quasar.security.property;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -14,6 +14,11 @@ import java.util.List;
 @ToString
 @Getter
 @Setter
+/**
+ * use this properites need annotation
+ * @EnableConfigurationProperties(QuasarProperties.class)
+ * example is : ConfigCommandRunner
+ */
 public class QuasarProperties {
     /**
      * 是否开启
