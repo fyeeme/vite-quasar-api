@@ -54,6 +54,23 @@ DELETE http://localhost:8600 HTTP/1.1
 Content-Type: application/json
 
 
+###
+# emtpy condition
+
+POST   http://localhost:8600/messages/search HTTP/1.1
+Content-Type: application/json
+
+{
+  "page": "2",
+  "pageSize": "2",
+  "sortOrders":[
+    {
+      "field":"id",
+      "ascending":false
+    }
+  ]
+}
+
 
 ### 
 
