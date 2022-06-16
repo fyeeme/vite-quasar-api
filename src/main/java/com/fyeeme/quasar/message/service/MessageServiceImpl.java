@@ -28,6 +28,9 @@ public class MessageServiceImpl implements MessageService {
     public Message update(Message message) {
         var existedMessage = get(message.getId());
         BeanUtils.copyProperties(message, existedMessage, "id", "createdBy", "createdDate");
+
+        //TODO modifiedBy should be null, if we want to use JPA Auditable
+        existedMessage.setModifiedBy(null);
         return repository.save(existedMessage);
     }
 

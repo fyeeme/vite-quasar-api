@@ -70,13 +70,6 @@ Content-Type: application/json
       "value": "你好"
     }
   ],
-  "orConditions":[
-      {
-      "field": "content",
-      "operator": "like",
-      "value": "time"
-    }
-  ],
   "sortOrders":[
     {
       "field":"id",
