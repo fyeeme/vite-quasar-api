@@ -1,21 +1,22 @@
 package com.fyeeme.quasar.base.repository.suppport;
 
-import com.fyeeme.quasar.base.enums.FilterOperationEnum;
-import com.fyeeme.quasar.base.repository.dto.FieldCondition;
-import com.fyeeme.quasar.base.repository.dto.JoinFieldCondition;
-import com.fyeeme.quasar.base.repository.dto.QueryCondition;
+import com.fyeeme.quasar.base.enums.QueryOperationEnum;
+import com.fyeeme.quasar.base.entity.QueryCondition;
 import com.fyeeme.quasar.core.exception.BizException;
 import com.fyeeme.quasar.core.exception.CommonError;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.CollectionUtils;
 
-import javax.persistence.criteria.*;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.Path;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 
 /**
  * https://self-learning-java-tutorial.blogspot.com/2020/08/spring-jpa-specification-to-join-tables.html
  */
-public class GenericSpecificationBuilder {
+public class ResourceSpecificationBuilder {
 
     public static <T> Specification<T> buildSpecs(QueryCondition filterQuery, Class<T> clazz) {
         Specification<T> andSpecs = (root, query, builder) -> {
@@ -67,20 +68,21 @@ public class GenericSpecificationBuilder {
         return andSpecs.and(joinSpecs).or(orSpecs);
     }
 
-    private static <T> void addJoinPredicates(ArrayList<Predicate> predicates, JoinFieldCondition condition, CriteriaBuilder builder, Root<T> root) {
+    private static <T> void addJoinPredicates(ArrayList<Predicate> predicates, QueryCondition.JoinFieldCondition condition, CriteriaBuilder builder, Root<T> root) {
         var fieldCondition = condition.getCondition();
         var joinEntity = root.join(condition.getJoinField());
         var expression = joinEntity.get(fieldCondition.getField());
         addFieldPredicate(predicates, fieldCondition, builder, expression);
     }
 
-    private static <T> void addFieldPredicates(ArrayList<Predicate> predicates, FieldCondition condition, CriteriaBuilder builder, Root<T> root) {
+    private static <T> void addFieldPredicates(ArrayList<Predicate> predicates, QueryCondition.FieldCondition condition, CriteriaBuilder builder, Root<T> root) {
         var expression = root.get(condition.getField());
         addFieldPredicate(predicates, condition, builder, expression);
     }
 
-    private static void addFieldPredicate(ArrayList<Predicate> predicates, FieldCondition condition, CriteriaBuilder builder, Path expression) {
-        var operator = FilterOperationEnum.fromValue(condition.getOperator());
+    private static void addFieldPredicate(ArrayList<Predicate> predicates, QueryCondition.FieldCondition condition, CriteriaBuilder builder, Path expression) {
+        var operator = QueryOperationEnum.fromValue(condition.getOperator());
+
         switch (operator) {
             case EQUAL -> predicates.add(builder.equal(expression, condition.getValue()));
             case LIKE -> predicates.add(builder.like(expression, "%" + condition.getValue() + "%"));
@@ -92,7 +94,7 @@ public class GenericSpecificationBuilder {
             case NOT_EQUAL -> predicates.add(builder.notEqual(expression, condition.getValue()));
             case IS_NULL -> predicates.add(builder.isNull(expression));
             case IS_NOT_NULL -> predicates.add(builder.isNotNull(expression));
-            default -> new BizException(CommonError.BAD_REQUEST, condition.getOperator() + "is not a valid operate");
+            default -> throw new BizException(CommonError.BAD_REQUEST, condition.getOperator() + "is not a valid operate");
         }
     }
 

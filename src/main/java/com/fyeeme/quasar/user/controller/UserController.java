@@ -1,6 +1,6 @@
 package com.fyeeme.quasar.user.controller;
 
-import com.fyeeme.quasar.base.repository.dto.QueryCondition;
+import com.fyeeme.quasar.base.entity.QueryCondition;
 import com.fyeeme.quasar.core.exception.AssertEntity;
 import com.fyeeme.quasar.core.exception.CommonError;
 import com.fyeeme.quasar.user.entity.Role;

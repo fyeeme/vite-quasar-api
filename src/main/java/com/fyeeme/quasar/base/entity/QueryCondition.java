@@ -1,4 +1,4 @@
-package com.fyeeme.quasar.base.repository.dto;
+package com.fyeeme.quasar.base.entity;
 
 import lombok.Data;
 
@@ -30,4 +30,24 @@ public class QueryCondition implements Serializable {
         private String field;
         private Boolean ascending;
     }
+
+    /**
+     * 连表查询对象
+     */
+    @Data
+    public static class JoinFieldCondition {
+        private String joinField;
+        private FieldCondition condition;
+    }
+
+    /**
+     * 单表查询对象
+     */
+    @Data
+    public static class FieldCondition {
+        private String field;
+        private String operator;
+        private Object value;
+    }
+
 }

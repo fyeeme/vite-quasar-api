@@ -1,7 +1,7 @@
 package com.fyeeme.quasar.user.service;
 
-import com.fyeeme.quasar.base.repository.dto.QueryCondition;
-import com.fyeeme.quasar.base.repository.suppport.GenericSpecificationBuilder;
+import com.fyeeme.quasar.base.entity.QueryCondition;
+import com.fyeeme.quasar.base.repository.suppport.ResourceSpecificationBuilder;
 import com.fyeeme.quasar.core.exception.AssertEntity;
 import com.fyeeme.quasar.core.exception.CommonError;
 import com.fyeeme.quasar.user.entity.User;
@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Page<User> findAll(QueryCondition filter) {
-        var specs = GenericSpecificationBuilder.buildSpecs(filter, User.class);
+        var specs = ResourceSpecificationBuilder.buildSpecs(filter, User.class);
         return repository.findAll(specs, toPageRequest(filter));
     }
 

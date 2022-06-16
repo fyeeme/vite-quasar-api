@@ -1,7 +1,7 @@
 package com.fyeeme.quasar.message.service;
 
-import com.fyeeme.quasar.base.repository.dto.QueryCondition;
-import com.fyeeme.quasar.base.repository.suppport.GenericSpecificationBuilder;
+import com.fyeeme.quasar.base.entity.QueryCondition;
+import com.fyeeme.quasar.base.repository.suppport.ResourceSpecificationBuilder;
 import com.fyeeme.quasar.message.entity.Message;
 import com.fyeeme.quasar.message.repository.MessageRepository;
 import com.fyeeme.quasar.core.exception.AssertEntity;
@@ -43,7 +43,7 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public Page<Message> findAll(QueryCondition filter) {
-        var specs = GenericSpecificationBuilder.buildSpecs(filter, Message.class);
+        var specs = ResourceSpecificationBuilder.buildSpecs(filter, Message.class);
         return repository.findAll(specs, toPageRequest(filter));
     }
 }

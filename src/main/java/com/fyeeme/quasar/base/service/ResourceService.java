@@ -1,7 +1,7 @@
 package com.fyeeme.quasar.base.service;
 
 import com.fyeeme.quasar.base.entity.BaseEntity;
-import com.fyeeme.quasar.base.repository.dto.QueryCondition;
+import com.fyeeme.quasar.base.entity.QueryCondition;
 import com.fyeeme.quasar.core.exception.BizException;
 import com.fyeeme.quasar.core.exception.CommonError;
 import org.springframework.data.domain.Page;

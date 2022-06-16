@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 @Getter
 @AllArgsConstructor
-public enum FilterOperationEnum {
+public enum QueryOperationEnum {
 
     EQUAL("eq"),
     LIKE("like"),
@@ -33,11 +33,11 @@ public enum FilterOperationEnum {
 
     private final String value;
     //缓存 values
-    static final FilterOperationEnum[] VALUES;
+    static final QueryOperationEnum[] VALUES;
     static  {
-        VALUES = FilterOperationEnum.values();
+        VALUES = QueryOperationEnum.values();
     }
-    public static FilterOperationEnum fromValue(String value) {
+    public static QueryOperationEnum fromValue(String value) {
         return Arrays.stream(VALUES)
                 .filter(item -> item.value.equalsIgnoreCase(value))
                 .findFirst()

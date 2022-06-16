@@ -1,6 +1,6 @@
 package com.fyeeme.quasar.message.controller;
 
-import com.fyeeme.quasar.base.repository.dto.QueryCondition;
+import com.fyeeme.quasar.base.entity.QueryCondition;
 import com.fyeeme.quasar.message.entity.Message;
 import com.fyeeme.quasar.message.service.MessageService;
 import org.springframework.data.domain.Page;
