@@ -2,7 +2,7 @@ CREATE TABLE `user` (
   `id` INT NOT NULL AUTO_INCREMENT COMMENT '用户ID',
   `username` VARCHAR(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '用户名',
   `nickname` VARCHAR(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户昵称',
-  `password` VARCHAR(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '用户密码',
+  `password` VARCHAR(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '用户密码',
   `phone` VARCHAR(32) DEFAULT NULL COMMENT '手机号',
   `email` VARCHAR(64) DEFAULT NULL COMMENT '邮箱',
   `avatar` VARCHAR(200) DEFAULT NULL COMMENT '头像',
