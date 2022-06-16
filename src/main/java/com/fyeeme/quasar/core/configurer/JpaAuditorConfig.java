@@ -16,17 +16,14 @@ import java.util.Optional;
 public class JpaAuditorConfig {
     @Bean
     public AuditorAware<Long> auditorAware() {
-        return new AuditorAware<Long>() {
-            @Override
-            public Optional<Long> getCurrentAuditor() {
-                var authentication = SecurityContextHolder.getContext().getAuthentication();
+        return () -> {
+            var authentication = SecurityContextHolder.getContext().getAuthentication();
 
-                if (Objects.isNull(authentication) || !authentication.isAuthenticated()) {
-                    return Optional.empty();
-                }
-                var currentUser = (User) authentication.getPrincipal();
-                return Optional.of(currentUser.getId());
+            if (Objects.isNull(authentication) || !authentication.isAuthenticated()) {
+                return Optional.empty();
             }
+            var currentUser = (User) authentication.getPrincipal();
+            return Optional.of(currentUser.getId());
         };
     }
 }
