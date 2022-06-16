@@ -1,4 +1,4 @@
-package com.fyeeme.quasar.security.configurer;
+package com.fyeeme.quasar.core.configurer;
 
 import com.fyeeme.quasar.user.entity.User;
 import org.springframework.context.annotation.Bean;

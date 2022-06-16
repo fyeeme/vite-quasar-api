@@ -1,4 +1,4 @@
-package com.fyeeme.quasar.security.property;
+package com.fyeeme.quasar.core.property;
 
 import lombok.Getter;
 import lombok.Setter;

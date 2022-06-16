@@ -5,12 +5,32 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/quasar
     password: root
     username: root
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+
 management:
   endpoints:
     web:
       base-path: /manage
       exposure:
         include: '*'
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+      hibernate:
+        sql: DEBUG
+        type:
+          descriptor:
+            sql:
+              basic-binder:
+                TRACE
+    web: TRACE
 
 # custom properties
 quasar:

@@ -1,4 +1,4 @@
-package com.fyeeme.quasar.security.jpa;
+package com.fyeeme.quasar.core.jpa;
 
 import com.fyeeme.quasar.user.entity.User;
 import org.springframework.data.domain.AuditorAware;

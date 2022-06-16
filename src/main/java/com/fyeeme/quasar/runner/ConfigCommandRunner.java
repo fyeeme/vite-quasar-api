@@ -1,6 +1,6 @@
 package com.fyeeme.quasar.runner;
 
-import com.fyeeme.quasar.security.property.QuasarProperties;
+import com.fyeeme.quasar.core.property.QuasarProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;

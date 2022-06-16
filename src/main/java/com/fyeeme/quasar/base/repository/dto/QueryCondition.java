@@ -1,16 +1,15 @@
 package com.fyeeme.quasar.base.repository.dto;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 public class QueryCondition implements Serializable {
+    @Serial
+    private static final long serialVersionUID = -2662365981651296053L;
     private Integer page = 0;
     private Integer pageSize = 10;
     private List<SortOrder> sortOrders;
@@ -27,8 +26,7 @@ public class QueryCondition implements Serializable {
      * 分页排序
      */
     @Data
-    @RequiredArgsConstructor
-    private static class SortOrder {
+    public static class SortOrder {
         private String field;
         private Boolean ascending;
     }

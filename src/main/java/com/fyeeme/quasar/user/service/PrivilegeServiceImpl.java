@@ -17,7 +17,7 @@ public class PrivilegeServiceImpl implements PrivilegeService {
     }
 
     @Override
-    public List<Privilege> listAll(QueryCondition filter) {
+    public List<Privilege> listAll(QueryCondition query) {
         return repository.findAll();
     }
 

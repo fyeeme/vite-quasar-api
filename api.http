@@ -23,10 +23,95 @@ Content-Type: application/json
 
 {
   "page": "1",
-  "pageSize": "10"
+  "pageSize": "10",
+  "andConditions": [
+    {
+      "field": "nickname",
+      "operator": "eq",
+      "value": "ly"
+    },
+     {
+      "field": "username",
+      "operator": "like",
+      "value": "ly"
+    }
+  ],
+  "joinConditions": [
+   {
+     "joinField": "roles",
+     "condition": {
+      "field": "name",
+      "operator": "eq",
+      "value": "user"
+    }
+   }
+  ]
 }
 
 ###
 
 DELETE http://localhost:8600 HTTP/1.1
 Content-Type: application/json
+
+
+
+### 
+
+POST   http://localhost:8600/messages/search HTTP/1.1
+Content-Type: application/json
+
+{
+  "page": "1",
+  "pageSize": "10",
+  "andConditions": [
+    {
+      "field": "title",
+      "operator": "eq",
+      "value": "你好"
+    }
+  ],
+  "orConditions":[
+      {
+      "field": "content",
+      "operator": "like",
+      "value": "time"
+    }
+  ],
+  "sortOrders":[
+    {
+      "field":"id",
+      "ascending":false
+    }
+  ]
+}
+
+### 
+
+
+POST   http://localhost:8600/messages/search HTTP/1.1
+Content-Type: application/json
+
+{
+  "page": "1",
+  "pageSize": "10",
+  "andConditions": [
+    {
+      "field": "id",
+      "operator": "lt",
+      "value": "2"
+    }
+  ],
+  "orConditions":[
+      {
+      "field": "content",
+      "operator": "like",
+      "value": "time"
+    }
+  ],
+  "sortOrders":[
+    {
+      "field":"id",
+      "ascending":false
+    }
+  ]
+}

@@ -6,14 +6,7 @@ spring:
     out-of-order: true
     validate-on-migrate: false
   jpa:
-    open-in-view: false
-
-logging:
-  level:
-    org:
-      springframework:
-        security: DEBUG
-    web: TRACE
+    open-in-view: true
 
 ---
 

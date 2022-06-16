@@ -1,4 +1,4 @@
-package com.fyeeme.quasar.security.handler;
+package com.fyeeme.quasar.core.handler;
 
 import com.fyeeme.quasar.base.entity.ApiResult;
 import org.springframework.core.MethodParameter;

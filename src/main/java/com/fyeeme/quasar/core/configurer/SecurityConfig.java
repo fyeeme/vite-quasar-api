@@ -1,6 +1,6 @@
-package com.fyeeme.quasar.security.configurer;
+package com.fyeeme.quasar.core.configurer;
 
-import com.fyeeme.quasar.security.handler.AuthenticationHandler;
+import com.fyeeme.quasar.core.handler.AuthenticationHandler;
 import com.fyeeme.quasar.user.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

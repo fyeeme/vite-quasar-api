@@ -2,23 +2,27 @@ package com.fyeeme.quasar.base.service;
 
 import com.fyeeme.quasar.base.entity.BaseEntity;
 import com.fyeeme.quasar.base.repository.dto.QueryCondition;
+import com.fyeeme.quasar.core.exception.BizException;
+import com.fyeeme.quasar.core.exception.CommonError;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 
 public interface ResourceService<T extends BaseEntity, F extends QueryCondition> {
     default T create(T t) {
-        return null;
+        throw new BizException(CommonError.BAD_REQUEST);
     }
 
     default T update(T t) {
-        return null;
+        throw new BizException(CommonError.BAD_REQUEST);
     }
 
     default T get(Long id) {
-        return null;
+        throw new BizException(CommonError.BAD_REQUEST);
     }
 
     /**
@@ -29,15 +33,15 @@ public interface ResourceService<T extends BaseEntity, F extends QueryCondition>
      * @return T
      */
     default T delete(Long id) {
-        return null;
+        throw new BizException(CommonError.BAD_REQUEST);
     }
 
-    default Page<T> findAll(F filter) {
-        return null;
+    default Page<T> findAll(F query) {
+        throw new BizException(CommonError.BAD_REQUEST);
     }
 
-    default List<T> listAll(F filter) {
-        return null;
+    default List<T> listAll(F query) {
+        throw new BizException(CommonError.BAD_REQUEST);
     }
 
     // another way of naming create method
@@ -68,6 +72,13 @@ public interface ResourceService<T extends BaseEntity, F extends QueryCondition>
      * 返回默认的Page对象: ID DESC
      */
     default Pageable toPageRequest(F f) {
-        return PageRequest.of(f.getPage(), f.getPageSize());
+        Sort sort = Sort.unsorted();
+        if (!CollectionUtils.isEmpty(f.getOrConditions())) {
+            sort = Sort.by(f.getSortOrders().stream()
+                    .map(order -> Sort.Order.by(order.getField()).with(order.getAscending() ? Sort.Direction.ASC : Sort.Direction.DESC))
+                    .toList()
+            );
+        }
+        return PageRequest.of(f.getPage(), f.getPageSize(), sort);
     }
 }

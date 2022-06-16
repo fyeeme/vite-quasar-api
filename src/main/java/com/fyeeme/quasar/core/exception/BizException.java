@@ -1,4 +1,4 @@
-package com.fyeeme.quasar.security.exception;
+package com.fyeeme.quasar.core.exception;
 
 import lombok.Getter;
 

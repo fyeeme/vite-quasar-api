@@ -1,7 +1,9 @@
 package com.fyeeme.quasar.message.controller;
 
+import com.fyeeme.quasar.base.repository.dto.QueryCondition;
 import com.fyeeme.quasar.message.entity.Message;
 import com.fyeeme.quasar.message.service.MessageService;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -29,5 +31,10 @@ public class MessageController {
     @GetMapping("/{id}")
     public Message getMessage(@PathVariable Long id) {
         return messageService.get(id);
+    }
+
+    @PostMapping("/search")
+    public Page<Message> searchMessages(@RequestBody QueryCondition query) {
+        return messageService.findAll(query);
     }
 }

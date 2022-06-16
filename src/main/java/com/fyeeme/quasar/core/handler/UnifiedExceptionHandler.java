@@ -1,7 +1,7 @@
-package com.fyeeme.quasar.security.handler;
+package com.fyeeme.quasar.core.handler;
 
 import com.fyeeme.quasar.base.entity.ApiError;
-import com.fyeeme.quasar.security.exception.BizException;
+import com.fyeeme.quasar.core.exception.BizException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;

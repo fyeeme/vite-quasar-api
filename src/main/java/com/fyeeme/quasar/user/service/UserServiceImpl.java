@@ -1,14 +1,14 @@
 package com.fyeeme.quasar.user.service;
 
 import com.fyeeme.quasar.base.repository.dto.QueryCondition;
-import com.fyeeme.quasar.security.exception.AssertEntity;
-import com.fyeeme.quasar.security.exception.CommonError;
+import com.fyeeme.quasar.base.repository.suppport.GenericSpecificationBuilder;
+import com.fyeeme.quasar.core.exception.AssertEntity;
+import com.fyeeme.quasar.core.exception.CommonError;
 import com.fyeeme.quasar.user.entity.User;
 import com.fyeeme.quasar.user.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @Slf4j
@@ -29,19 +29,12 @@ public class UserServiceImpl implements UserService {
         return savedUser;
     }
 
-
     @Override
     public User update(User user) {
         var existedUser = repository.getById(user.getId());
         existedUser.setNickname(user.getNickname());
         var savedUser = repository.save(existedUser);
         return savedUser;
-    }
-
-
-    @Override
-    public List<User> listAll(QueryCondition filter) {
-        return repository.findAll();
     }
 
     @Override
@@ -53,6 +46,12 @@ public class UserServiceImpl implements UserService {
         var user = optional.get();
         log.info("user roles: {}", user.getRoles());
         return user;
+    }
+
+    @Override
+    public Page<User> findAll(QueryCondition filter) {
+        var specs = GenericSpecificationBuilder.buildSpecs(filter, User.class);
+        return repository.findAll(specs, toPageRequest(filter));
     }
 
 }

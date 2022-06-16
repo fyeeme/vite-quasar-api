@@ -1,16 +1,16 @@
 package com.fyeeme.quasar.user.controller;
 
 import com.fyeeme.quasar.base.repository.dto.QueryCondition;
-import com.fyeeme.quasar.security.exception.AssertEntity;
-import com.fyeeme.quasar.security.exception.CommonError;
+import com.fyeeme.quasar.core.exception.AssertEntity;
+import com.fyeeme.quasar.core.exception.CommonError;
 import com.fyeeme.quasar.user.entity.Role;
 import com.fyeeme.quasar.user.entity.User;
 import com.fyeeme.quasar.user.service.UserService;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
-import java.util.List;
 
 @PermitAll
 @RestController
@@ -25,7 +25,7 @@ public class UserController {
 
     @PostMapping()
     public User create(@RequestBody User user) {
-        AssertEntity.notNull(null,CommonError.USER,  CommonError.DISABLED);
+        AssertEntity.notNull(null, CommonError.USER, CommonError.DISABLED);
         var savedUser = userService.create(user);
         return savedUser;
     }
@@ -44,8 +44,8 @@ public class UserController {
     }
 
     @PostMapping("/search")
-    public List<User> findAll(@RequestBody QueryCondition filter) {
-        var users = userService.listAll(filter);
+    public Page<User> findAll(@RequestBody QueryCondition filter) {
+        var users = userService.findAll(filter);
         return users;
     }
 }
