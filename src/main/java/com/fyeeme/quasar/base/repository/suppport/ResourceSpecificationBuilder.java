@@ -24,10 +24,6 @@ public class ResourceSpecificationBuilder {
             var andConditions = Optional.ofNullable(filterQuery.getAndConditions()).orElse(Collections.emptyList());
             var andPredicates = andConditions.stream().map(condition -> addFieldPredicates(condition, builder, root)).toList();
 
-//            if (CollectionUtils.isEmpty(andPredicates)) {
-//                //TODO return null will omit 1=1 on where。
-//                return null;
-//            }
             return builder.and(andPredicates.toArray(new Predicate[0]));
         };
 
@@ -35,10 +31,6 @@ public class ResourceSpecificationBuilder {
             var orConditions = Optional.ofNullable(filterQuery.getOrConditions()).orElse(Collections.emptyList());
             var orPredicates = orConditions.stream().map(condition -> addFieldPredicates(condition, builder, root)).toList();
 
-//            if (CollectionUtils.isEmpty(orPredicates)) {
-//                //TODO return null will omit 1=1 on where。
-//                return null;
-//            }
             return builder.and(orPredicates.toArray(new Predicate[0]));
         };
 
@@ -47,7 +39,7 @@ public class ResourceSpecificationBuilder {
             var joinPredicates = joinConditions.stream().map(condition -> addJoinPredicates(condition, builder, root)).toList();
 
             if (CollectionUtils.isEmpty(joinPredicates)) {
-                //TODO return null will omit 1=1 on where。this is necessary when use or conditon.
+                //TODO return null will omit 1=1 on where。this is necessary when use or-condition.
                 return null;//builder.conjunction();
             }
             return builder.and(joinPredicates.toArray(new Predicate[0]));
