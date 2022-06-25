@@ -1,7 +1,7 @@
 package com.fyeeme.quasar.user.service;
 
 import com.fyeeme.quasar.base.entity.QueryCondition;
-import com.fyeeme.quasar.base.repository.suppport.ResourceSpecificationBuilder;
+import com.fyeeme.quasar.base.repository.suppport.GenericSpecificationBuilder;
 import com.fyeeme.quasar.core.exception.AssertEntity;
 import com.fyeeme.quasar.core.exception.CommonError;
 import com.fyeeme.quasar.user.entity.User;
@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getByUsername(String username) {
         var optional = repository.findByUsername(username);
-        AssertEntity.isTrue(optional.isPresent(), CommonError.USER, CommonError.NOT_FOUND.getMessage());
+        AssertEntity.isTrue(optional.isPresent(), CommonError.USER, CommonError.NOT_FOUND);
         // TODO solved open in view
         // https://www.baeldung.com/hibernate-initialize-proxy-exception
         var user = optional.get();
@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Page<User> findAll(QueryCondition filter) {
-        var specs = ResourceSpecificationBuilder.buildSpecs(filter, User.class);
+        var specs = GenericSpecificationBuilder.buildSpecs(filter, User.class);
         return repository.findAll(specs, toPageRequest(filter));
     }
 

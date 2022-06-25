@@ -12,40 +12,45 @@ import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 /**
- * https://self-learning-java-tutorial.blogspot.com/2020/08/spring-jpa-specification-to-join-tables.html
+ * this class is used to build all the queries and passed as parameters.
+ * andConditions(filter list for the AND operator)
+ * orConditions(filter list for the OR operator)
+ * joinConditions(filter list for the JOIN AND operator)
  */
-public class ResourceSpecificationBuilder {
+public class GenericSpecificationBuilder {
 
     public static <T> Specification<T> buildSpecs(QueryCondition filterQuery, Class<T> clazz) {
         Specification<T> andSpecs = (root, query, builder) -> {
             var andConditions = Optional.ofNullable(filterQuery.getAndConditions()).orElse(Collections.emptyList());
             var andPredicates = andConditions.stream().map(condition -> addFieldPredicates(condition, builder, root)).toList();
 
-            return builder.and(andPredicates.toArray(new Predicate[0]));
-        };
-
-        Specification<T> orSpecs = (root, query, builder) -> {
-            var orConditions = Optional.ofNullable(filterQuery.getOrConditions()).orElse(Collections.emptyList());
-            var orPredicates = orConditions.stream().map(condition -> addFieldPredicates(condition, builder, root)).toList();
-
-            return builder.and(orPredicates.toArray(new Predicate[0]));
+            return buildPredicates(builder, andPredicates);
         };
 
         Specification<T> joinSpecs = (root, query, builder) -> {
             var joinConditions = Optional.ofNullable(filterQuery.getJoinConditions()).orElse(Collections.emptyList());
             var joinPredicates = joinConditions.stream().map(condition -> addJoinPredicates(condition, builder, root)).toList();
 
-            if (CollectionUtils.isEmpty(joinPredicates)) {
-                //TODO return null will omit 1=1 on where。this is necessary when use or-condition.
-                return null;//builder.conjunction();
-            }
-            return builder.and(joinPredicates.toArray(new Predicate[0]));
+            return buildPredicates(builder, joinPredicates);
+        };
+
+        Specification<T> orSpecs = (root, query, builder) -> {
+            var orConditions = Optional.ofNullable(filterQuery.getOrConditions()).orElse(Collections.emptyList());
+            var orPredicates = orConditions.stream().map(condition -> addFieldPredicates(condition, builder, root)).toList();
+
+            return buildPredicates(builder, orPredicates);
         };
 
         return andSpecs.and(joinSpecs).or(orSpecs);
+    }
+
+    private static Predicate buildPredicates(CriteriaBuilder builder, List<Predicate> predicates) {
+        //fixme return null will omit 1=1 on where, which is necessary when use or-condition.
+        return CollectionUtils.isEmpty(predicates) ? null : builder.and(predicates.toArray(new Predicate[0]));
     }
 
     private static <T> Predicate addJoinPredicates(QueryCondition.JoinFieldCondition condition, CriteriaBuilder builder, Root<T> root) {
@@ -66,7 +71,10 @@ public class ResourceSpecificationBuilder {
         return switch (operator) {
             case EQUAL -> builder.equal(expression, condition.getValue());
             case LIKE -> builder.like(expression, "%" + condition.getValue() + "%");
-            case IN -> builder.in(expression).value(condition.getValue());
+            //Cannot cast java.lang.Integer to java.lang.Long"
+            case IN -> builder.in(expression).value(((List) condition.getValue()).stream().map(val ->
+                    val instanceof Number ? ((Number)val).longValue() : val).toList());
+//            case IN -> builder.in(expression).value(condition.getValue());
             case LESS_THAN -> builder.lessThan(expression, (Comparable) condition.getValue());
             case LESS_THAN_OR_EQUAL_TO -> builder.lessThanOrEqualTo(expression, (Comparable) condition.getValue());
             case GREATER_THAN -> builder.greaterThan(expression, (Comparable) condition.getValue());

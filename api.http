@@ -61,8 +61,20 @@ POST   http://localhost:8600/messages/search HTTP/1.1
 Content-Type: application/json
 
 {
-  "page": "2",
-  "pageSize": "2",
+  "page": "1",
+  "pageSize": "10",
+  "andConditions": [
+    {
+      "field": "id",
+      "operator": "in",
+      "value": [2,3]
+    },
+     {
+      "field": "title",
+      "operator": "in",
+      "value": ["你好"]
+    }
+  ],
   "sortOrders":[
     {
       "field":"id",

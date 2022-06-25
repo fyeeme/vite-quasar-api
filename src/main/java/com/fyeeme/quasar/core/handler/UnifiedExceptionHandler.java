@@ -9,6 +9,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -53,6 +54,9 @@ public class UnifiedExceptionHandler extends ResponseEntityExceptionHandler {
     @ResponseBody
     public ResponseEntity<Object> handleRuntimeException(Exception ex, WebRequest request) {
         var httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+        if (ex instanceof AccessDeniedException) {
+            httpStatus = HttpStatus.FORBIDDEN;
+        }
         return buildResponseEntity(ex, httpStatus.name(), String.valueOf(httpStatus.value()));
     }
 
@@ -96,7 +100,7 @@ public class UnifiedExceptionHandler extends ResponseEntityExceptionHandler {
 
 
     private String getErrorMessage(Exception ex) {
-        log.error("Process error message for env: {} - {}", environment.getActiveProfiles(), ex.getMessage());
+        log.error("Process error message for env: {} - {}", environment.getActiveProfiles(), ex.getMessage(), ex);
         // only show detail msg in dev env.
         var data = ex.getLocalizedMessage();
         var isProdEnv = Arrays.asList(environment.getActiveProfiles()).contains(ENV_PROD);

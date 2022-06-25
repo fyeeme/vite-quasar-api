@@ -12,6 +12,7 @@ public class ApiError<T> {
     private T data;
     private String code;
     private String status;
+
     private String message;
 
     private ApiError(T data, String message, String code) {

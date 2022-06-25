@@ -36,10 +36,10 @@ public class User extends Auditable<Long> implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         var privileges = roles.stream()
-            .map(Role::getPrivileges)
-            .flatMap(Collection::stream)
-            .map(Privilege::getCode)
-            .collect(Collectors.toSet());
+                .map(Role::getPrivileges)
+                .flatMap(Collection::stream)
+                .map(privilege -> "ROLE_" + privilege.getCode())
+                .collect(Collectors.toSet());
         return privileges.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toSet());
     }
 

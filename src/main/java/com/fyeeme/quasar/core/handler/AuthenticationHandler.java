@@ -50,7 +50,8 @@ public class AuthenticationHandler implements AuthenticationSuccessHandler, Auth
             return;
         }
         //状态OK, 数据提示登陆失败
-        var apiResult = ApiError.of(exception.getClass().getSimpleName(), "400", exception.getMessage());
+        var apiResult = ApiError.of(exception.getClass().getSimpleName(), exception.getMessage(),
+                "100401");
         log.error("Login failed: {}", exception.getMessage(), exception);
 
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);

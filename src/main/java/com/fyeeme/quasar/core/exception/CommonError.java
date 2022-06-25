@@ -51,7 +51,7 @@ public enum CommonError implements Err {
     COURSE("200", "Course"),
     COURSE_CATEGORY("201", "Course Category"),
 
-    MESSAGE("300","Message")
+    MESSAGE("300", "Message")
     // 400
     // 100400
     // USER BAD REQUEST
