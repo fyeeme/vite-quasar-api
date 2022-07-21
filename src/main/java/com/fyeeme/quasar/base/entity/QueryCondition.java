@@ -2,13 +2,11 @@ package com.fyeeme.quasar.base.entity;
 
 import lombok.Data;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 
 @Data
 public class QueryCondition implements Serializable {
-    @Serial
     private static final long serialVersionUID = -2662365981651296053L;
     private Integer page = 0;
     private Integer pageSize = 10;

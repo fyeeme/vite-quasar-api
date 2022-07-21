@@ -20,7 +20,7 @@ import java.io.IOException;
 @Slf4j
 @Component
 public class AuthenticationHandler implements AuthenticationSuccessHandler, AuthenticationFailureHandler, LogoutSuccessHandler {
-
+    public static final String ERROR_CODE = "100401";
     private final ObjectMapper objectMapper;
 
     public AuthenticationHandler(ObjectMapper objectMapper) {
@@ -51,7 +51,7 @@ public class AuthenticationHandler implements AuthenticationSuccessHandler, Auth
         }
         //状态OK, 数据提示登陆失败
         var apiResult = ApiError.of(exception.getClass().getSimpleName(), exception.getMessage(),
-                "100401");
+                ERROR_CODE);
         log.error("Login failed: {}", exception.getMessage(), exception);
 
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);

@@ -3,13 +3,12 @@ package com.fyeeme.quasar.base.entity;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.io.Serial;
 import java.io.Serializable;
+
 
 @Getter
 @Setter
 public class ApiResult<T> implements Serializable {
-    @Serial
     private static final long serialVersionUID = 3730196843273566375L;
     public static final String SUCCESS = "success";
     public static final String CODE = "200";

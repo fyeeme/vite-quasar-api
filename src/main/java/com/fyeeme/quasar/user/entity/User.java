@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 @Setter
 public class User extends Auditable<Long> implements UserDetails {
 
+    private static final long serialVersionUID = 1317843457585810749L;
     @Column(unique = true)
     private String username;
     private String password;

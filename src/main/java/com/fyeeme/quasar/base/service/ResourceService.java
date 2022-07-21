@@ -2,8 +2,10 @@ package com.fyeeme.quasar.base.service;
 
 import com.fyeeme.quasar.base.entity.BaseEntity;
 import com.fyeeme.quasar.base.entity.QueryCondition;
+import com.fyeeme.quasar.base.repository.ResourceRepository;
 import com.fyeeme.quasar.core.exception.BizException;
 import com.fyeeme.quasar.core.exception.CommonError;
+import org.slf4j.Logger;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -11,10 +13,23 @@ import org.springframework.data.domain.Sort;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public interface ResourceService<T extends BaseEntity, F extends QueryCondition> {
+
+    default ResourceRepository<T> getResourceRepository() {
+        throw new BizException(CommonError.BAD_REQUEST);
+    }
+
+    default Logger getLogger() {
+        throw new BizException(CommonError.BAD_REQUEST);
+    }
+
     default T create(T t) {
         throw new BizException(CommonError.BAD_REQUEST);
+//        var savedEntity = getResourceRepository().save(t);
+//        getLogger().info("New {} saved: {}", t.getClass().getSimpleName(), t);
+//        return savedEntity;
     }
 
     default T update(T t) {
@@ -76,7 +91,7 @@ public interface ResourceService<T extends BaseEntity, F extends QueryCondition>
         if (!CollectionUtils.isEmpty(f.getOrConditions())) {
             sort = Sort.by(f.getSortOrders().stream()
                     .map(order -> Sort.Order.by(order.getField()).with(order.getAscending() ? Sort.Direction.ASC : Sort.Direction.DESC))
-                    .toList()
+                    .collect(Collectors.toList())
             );
         }
         return PageRequest.of(f.getPage(), f.getPageSize(), sort);

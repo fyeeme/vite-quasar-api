@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 
+@SuppressWarnings("serial")
 @Getter
 @Setter
 @EqualsAndHashCode

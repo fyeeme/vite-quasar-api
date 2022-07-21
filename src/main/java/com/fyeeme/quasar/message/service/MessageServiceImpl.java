@@ -43,7 +43,8 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public Page<Message> findAll(QueryCondition filter) {
-        var specs = GenericSpecificationBuilder.buildSpecs(filter, Message.class);
+        var specs =
+                GenericSpecificationBuilder.buildSpecs(filter, Message.class);
         return repository.findAll(specs, toPageRequest(filter));
     }
 }

@@ -25,16 +25,14 @@ public class UserController {
 
     @PostMapping()
     public User create(@RequestBody User user) {
-        AssertEntity.notNull(null, CommonError.USER, CommonError.DISABLED);
-        var savedUser = userService.create(user);
-        return savedUser;
+        AssertEntity.notNull(user, CommonError.MESSAGE, CommonError.ALREADY_FINISHED);
+        return userService.create(user);
     }
 
     @PutMapping()
     @RolesAllowed({Role.USER})
     public User update(@RequestBody User user) {
-        var savedUser = userService.update(user);
-        return savedUser;
+        return userService.update(user);
     }
 
     @GetMapping("/{id}")
@@ -45,7 +43,6 @@ public class UserController {
 
     @PostMapping("/search")
     public Page<User> findAll(@RequestBody QueryCondition filter) {
-        var users = userService.findAll(filter);
-        return users;
+        return userService.findAll(filter);
     }
 }
