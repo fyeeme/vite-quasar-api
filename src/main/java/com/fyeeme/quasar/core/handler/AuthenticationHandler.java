@@ -3,6 +3,7 @@ package com.fyeeme.quasar.core.handler;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fyeeme.quasar.base.entity.ApiError;
 import com.fyeeme.quasar.base.entity.ApiResult;
+import com.fyeeme.quasar.base.util.CaseConverter;
 import com.fyeeme.quasar.user.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -20,7 +21,6 @@ import java.io.IOException;
 @Slf4j
 @Component
 public class AuthenticationHandler implements AuthenticationSuccessHandler, AuthenticationFailureHandler, LogoutSuccessHandler {
-    public static final String ERROR_CODE = "100401";
     private final ObjectMapper objectMapper;
 
     public AuthenticationHandler(ObjectMapper objectMapper) {
@@ -50,8 +50,8 @@ public class AuthenticationHandler implements AuthenticationSuccessHandler, Auth
             return;
         }
         //状态OK, 数据提示登陆失败
-        var apiResult = ApiError.of(exception.getClass().getSimpleName(), exception.getMessage(),
-                ERROR_CODE);
+        var apiResult = ApiError.of(exception.getClass().getSimpleName(), CaseConverter.convertToCamelCase(exception.getMessage()),
+                401);
         log.error("Login failed: {}", exception.getMessage(), exception);
 
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);

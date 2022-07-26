@@ -8,7 +8,10 @@ import com.fyeeme.quasar.user.entity.User;
 import com.fyeeme.quasar.user.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -25,32 +28,33 @@ public class UserServiceImpl implements UserService {
         user.setId(null);
         user.setEnabled(true);
         user.setLocked(false);
-        var savedUser = repository.save(user);
-        return savedUser;
+        return repository.save(user);
     }
 
     @Override
     public User update(User user) {
-        var existedUser = repository.getById(user.getId());
+        Optional<User> optional = repository.findById(user.getId());
+        AssertEntity.notNull(optional.orElse(null), User.class, CommonError.NOT_FOUND);
+
+        User existedUser = optional.get();
         existedUser.setNickname(user.getNickname());
-        var savedUser = repository.save(existedUser);
-        return savedUser;
+        return repository.save(existedUser);
     }
 
     @Override
     public User getByUsername(String username) {
         var optional = repository.findByUsername(username);
-        AssertEntity.isTrue(optional.isPresent(), CommonError.USER, CommonError.NOT_FOUND);
+        AssertEntity.isTrue(optional.isPresent(), User.class, CommonError.NOT_FOUND);
         // TODO solved open in view
         // https://www.baeldung.com/hibernate-initialize-proxy-exception
-        var user = optional.get();
+        User user = optional.get();
         log.info("user roles: {}", user.getRoles());
         return user;
     }
 
     @Override
     public Page<User> findAll(QueryCondition filter) {
-        var specs = GenericSpecificationBuilder.buildSpecs(filter, User.class);
+        Specification<User> specs = GenericSpecificationBuilder.buildSpecs(filter, User.class);
         return repository.findAll(specs, toPageRequest(filter));
     }
 

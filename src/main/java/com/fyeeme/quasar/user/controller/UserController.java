@@ -25,7 +25,7 @@ public class UserController {
 
     @PostMapping()
     public User create(@RequestBody User user) {
-        AssertEntity.notNull(user, CommonError.MESSAGE, CommonError.ALREADY_FINISHED);
+        AssertEntity.notNull(user.getId(), User.class, CommonError.ALREADY_FINISHED);
         return userService.create(user);
     }
 
@@ -37,7 +37,7 @@ public class UserController {
 
     @GetMapping("/{id}")
     public User get(@PathVariable Long id) {
-        AssertEntity.notNull(null, CommonError.USER, CommonError.NOT_FOUND);
+        AssertEntity.notNull(null, User.class, CommonError.NOT_FOUND);
         return null;
     }
 

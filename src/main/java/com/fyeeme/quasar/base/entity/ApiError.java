@@ -10,19 +10,19 @@ public class ApiError<T> {
     // TODO if error occurred when validate entity, errors may be list.
     // private List<String> data;
     private T data;
-    private String code;
+    private Integer code;
     private String status;
 
     private String message;
 
-    private ApiError(T data, String message, String code) {
+    private ApiError(T data, String message, Integer code) {
         this.data = data;
         this.code = code;
         this.message = message;
         this.status = FAIL;
     }
 
-    public static <T> ApiError<T> of(T data, String message, String code) {
+    public static <T> ApiError<T> of(T data, String message, Integer code) {
         return new ApiError<>(data, message, code);
     }
 }

@@ -1,5 +1,7 @@
 package com.fyeeme.quasar.core.exception;
 
+import org.springframework.http.HttpStatus;
+
 public interface Err {
 
     /**
@@ -7,7 +9,7 @@ public interface Err {
      *
      * @return
      */
-    String getCode();
+    HttpStatus getCode();
 
     /**
      * 获取错误信息

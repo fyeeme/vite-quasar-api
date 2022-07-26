@@ -57,7 +57,7 @@ public class UnifiedExceptionHandler extends ResponseEntityExceptionHandler {
         if (ex instanceof AccessDeniedException) {
             httpStatus = HttpStatus.FORBIDDEN;
         }
-        return buildResponseEntity(ex, httpStatus.name(), String.valueOf(httpStatus.value()));
+        return buildResponseEntity(ex, httpStatus.name(), httpStatus);
     }
 
     /**
@@ -95,7 +95,7 @@ public class UnifiedExceptionHandler extends ResponseEntityExceptionHandler {
         if (HttpStatus.INTERNAL_SERVER_ERROR.equals(status)) {
             request.setAttribute(WebUtils.ERROR_EXCEPTION_ATTRIBUTE, ex, WebRequest.SCOPE_REQUEST);
         }
-        return buildResponseEntity(ex, status.getReasonPhrase(), String.valueOf(status.value()));
+        return buildResponseEntity(ex, status.getReasonPhrase(), status);
     }
 
 
@@ -107,7 +107,7 @@ public class UnifiedExceptionHandler extends ResponseEntityExceptionHandler {
         return isProdEnv ? ex.getClass().getSimpleName() : data;
     }
 
-    private ResponseEntity<Object> buildResponseEntity(Exception ex, String message, String code) {
-        return new ResponseEntity<>(ApiError.of(getErrorMessage(ex), message, code), HttpStatus.OK);
+    private ResponseEntity<Object> buildResponseEntity(Exception ex, String message, HttpStatus status) {
+        return new ResponseEntity<>(ApiError.of(getErrorMessage(ex), message, status.value()), HttpStatus.OK);
     }
 }

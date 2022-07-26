@@ -2,6 +2,8 @@ package com.fyeeme.quasar.core.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 
 
 /**
@@ -24,43 +26,53 @@ import lombok.Getter;
  * InvalidRequest https://help.aliyun.com/document_detail/31973.html?spm=a2c4g.11186623.6.1609.23975c9cjCf71z
  */
 @Getter
+@RequiredArgsConstructor
 @AllArgsConstructor
 public enum CommonError implements Err {
 
     //common
-    BAD_REQUEST("400", " Bad Request"),
-    UNAUTHORIZED("401", " Unauthorized"),
-    FORBIDDEN("403", " Forbidden"),
-    NOT_FOUND("404", " Not Found"),
-    CONFLICT("409", " Conflict"),
-    TOO_MANY_REQUESTS("429", " Too Many Requests"),
-    UNDEFINED("500", " Internal Server Error"),
+    BAD_REQUEST(HttpStatus.BAD_REQUEST, "Bad Request"),
+    UNAUTHORIZED(HttpStatus.UNAUTHORIZED, "Unauthorized"),
+    FORBIDDEN(HttpStatus.FORBIDDEN, "Forbidden"),
+    NOT_FOUND(HttpStatus.NOT_FOUND, "Not Found"),
+    CONFLICT(HttpStatus.CONFLICT, "Conflict"),
+    TOO_MANY_REQUESTS(HttpStatus.TOO_MANY_REQUESTS, "Too Many Requests"),
+    UNDEFINED(HttpStatus.UNAUTHORIZED, "Internal Server Error"),
 
     //business related more detailed for    CONFLICT("409", "Conflict")
-    ALREADY_JOINED("409", " Already Joined"),
-    NOT_STARTED("409", " Not Start"),
-    ALREADY_FINISHED("409", " Already Finished"),
-    DISABLED("403", "Disabled"),
+    ALREADY_JOINED(HttpStatus.CONFLICT, "Already Joined"),
+    NOT_STARTED(HttpStatus.CONFLICT, " Not Start"),
+    ALREADY_FINISHED(HttpStatus.CONFLICT, " Already Finished"),
+    DISABLED(HttpStatus.CONFLICT, "Disabled"),
 
 
     //Module
-    USER("100", "User"),
-    ROLE("101", "Role"),
-    PRIVILEGE("102", "Privilege"),
+    USER("User"),
+    ROLE("Role"),
+    PRIVILEGE("Privilege"),
 
-    COURSE("200", "Course"),
-    COURSE_CATEGORY("201", "Course Category"),
+    COURSE("Course"),
+    COURSE_CATEGORY("Course Category"),
 
-    MESSAGE("300", "Message")
+    MESSAGE("Message");
     // 400
     // 100400
     // USER BAD REQUEST
 
     //newly design
-    ;
 
-    private String code;
-    private String message;
+
+//    CommonError(String message) {
+//        this.message = message;
+//    }
+//
+//    CommonError(HttpStatus code, String message) {
+//        this.code = code;
+//        this.message = message;
+//    }
+
+    private HttpStatus code;
+    private final String message;
 
 
 }
