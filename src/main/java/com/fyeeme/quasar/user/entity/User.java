@@ -1,6 +1,7 @@
 package com.fyeeme.quasar.user.entity;
 
 import com.fyeeme.quasar.base.entity.Auditable;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
@@ -15,11 +16,14 @@ import java.util.stream.Collectors;
 @Entity
 @Getter
 @Setter
+@Schema(name = "User", description = "User Object")
 public class User extends Auditable<Long> implements UserDetails {
 
     private static final long serialVersionUID = 1317843457585810749L;
     @Column(unique = true)
+    @Schema(name = "username", description = "用户名")
     private String username;
+    @Schema(title = "密码",description = "密码必填", required = true, maxLength = 20)
     private String password;
     private String nickname;
     private String phone;

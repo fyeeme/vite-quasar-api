@@ -6,6 +6,9 @@ import com.fyeeme.quasar.core.exception.CommonError;
 import com.fyeeme.quasar.user.entity.Role;
 import com.fyeeme.quasar.user.entity.User;
 import com.fyeeme.quasar.user.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +18,7 @@ import javax.annotation.security.RolesAllowed;
 @PermitAll
 @RestController
 @RequestMapping("/users")
+@Tag(name = "user", description = "The user api")
 public class UserController {
 
     private final UserService userService;
@@ -23,6 +27,8 @@ public class UserController {
         this.userService = userService;
     }
 
+    @Operation(summary = "Create user", description = "Create new User")
+    @Parameter(name = "user", description = "The user object")
     @PostMapping()
     public User create(@RequestBody User user) {
         AssertEntity.notNull(user.getId(), User.class, CommonError.ALREADY_FINISHED);

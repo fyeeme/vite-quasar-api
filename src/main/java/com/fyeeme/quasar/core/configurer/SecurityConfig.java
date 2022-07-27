@@ -69,20 +69,4 @@ public class SecurityConfig {
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
-//    @Bean
-//    AuthenticationSuccessHandler successHandler() {
-//        return authenticationHandler;
-//    }
-//
-//    @Bean
-//    AuthenticationFailureHandler failureHandler() {
-//        return authenticationHandler;
-//    }
-//
-//    @Bean
-//    LogoutSuccessHandler logoutHandler() {
-//        return authenticationHandler;
-//    }
-
-
 }

@@ -1,5 +1,5 @@
 ## TODO
-
+            
 - [x] auditing
 - [x] cors
 - [x] csrf
@@ -135,4 +135,47 @@ Or we can use the Hibernate Criteria API:
 
 Criteria criteria = session.createCriteria(User.class);
 criteria.setFetchMode("roles", FetchMode.EAGER);
+```
+
+
+## spring doc
+
+disable https://petstore.swagger.io/v2/swagger.json
+
+1.  create `src/main/resources/static/swagger-config.json` and content is 
+```json
+{
+  "urls": [
+    {
+      "url": "/v3/api-docs",
+      "name": "kms"
+    }
+  ]
+}
+```
+
+2. create bean `SwaggerIndexTransformer`
+
+```java
+    @Value("${springdoc.api-docs.path}")
+    private String apiDocsUrl;
+
+    @Bean
+    public SwaggerIndexTransformer indexPageTransformer(
+            SwaggerUiConfigProperties swaggerUiConfig, SwaggerUiOAuthProperties swaggerUiOAuthProperties,
+            SwaggerUiConfigParameters swaggerUiConfigParameters, SwaggerWelcomeCommon swaggerWelcomeCommon, ObjectMapperProvider objectMapperProvider
+    ) {
+        return new SwaggerIndexPageTransformer(swaggerUiConfig, swaggerUiOAuthProperties, swaggerUiConfigParameters, swaggerWelcomeCommon, objectMapperProvider) {
+            @Override
+            protected String overwriteSwaggerDefaultUrl(String html) {
+                return html.replace(Constants.SWAGGER_UI_DEFAULT_URL, apiDocsUrl);
+            }
+        };
+    }
+```
+
+2.1 disable  `disable-swagger-default-url`
+
+```yaml
+disable-swagger-default-url: true
 ```

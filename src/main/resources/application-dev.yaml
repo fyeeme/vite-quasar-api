@@ -16,7 +16,7 @@ management:
     web:
       base-path: /manage
       exposure:
-        include: '*'
+        include: "*"
 
 logging:
   level:
@@ -28,8 +28,7 @@ logging:
         type:
           descriptor:
             sql:
-              basic-binder:
-                TRACE
+              basic-binder: TRACE
     web: TRACE
 
 # custom properties
@@ -42,3 +41,12 @@ quasar:
         - "ADMIN"
     enabled: true
     url: 192.168.1.1
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    config-url: /swagger-config.json
+    url: /v3/api-docs
+  #    disable-swagger-default-url: true
+  api-docs:
+    path: /v3/api-docs
