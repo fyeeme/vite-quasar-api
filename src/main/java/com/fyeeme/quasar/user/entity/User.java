@@ -21,9 +21,10 @@ public class User extends Auditable<Long> implements UserDetails {
 
     private static final long serialVersionUID = 1317843457585810749L;
     @Column(unique = true)
+
     @Schema(name = "username", description = "用户名")
     private String username;
-    @Schema(title = "密码",description = "密码必填", required = true, maxLength = 20)
+    @Schema(title = "密码",description = "密码必填", required = true, maxLength = 80)
     private String password;
     private String nickname;
     private String phone;

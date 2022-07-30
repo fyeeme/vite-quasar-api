@@ -15,4 +15,6 @@ public class Message extends Auditable<Long> {
 
     private String title;
     private String content;
+
+    private  String pid;
 }

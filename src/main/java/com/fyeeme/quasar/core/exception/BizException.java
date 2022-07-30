@@ -27,6 +27,7 @@ public class BizException extends RuntimeException {
         super(message);
         this.code = error.getCode();
         this.message = message;
+        String.format("%s%s", message, CaseConverter.convertToCamelCase(error.getMessage()));
     }
 
     public BizException(Err error, Throwable throwable) {

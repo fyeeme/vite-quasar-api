@@ -45,8 +45,4 @@ quasar:
 springdoc:
   swagger-ui:
     path: /swagger-ui.html
-    config-url: /swagger-config.json
-    url: /v3/api-docs
-  #    disable-swagger-default-url: true
-  api-docs:
-    path: /v3/api-docs
+    disable-swagger-default-url: true

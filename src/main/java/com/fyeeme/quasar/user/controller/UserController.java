@@ -19,6 +19,7 @@ import javax.annotation.security.RolesAllowed;
 @RestController
 @RequestMapping("/users")
 @Tag(name = "user", description = "The user api")
+
 public class UserController {
 
     private final UserService userService;

@@ -1,12 +1,17 @@
 ## TODO
             
 - [x] auditing
+- 
 - [x] cors
 - [x] csrf
+- 
 - [x] exception
   - [ ] 优化错误码的逻辑，解决基于数字错误码冲突的问题
 - [x] api result
+- 
 - [x] generic jpa specification builder
+  - filte whie
+
 - [ ] dto to entity
 
 ## auditing

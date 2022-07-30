@@ -41,10 +41,9 @@ public enum CommonError implements Err {
 
     //business related more detailed for    CONFLICT("409", "Conflict")
     ALREADY_JOINED(HttpStatus.CONFLICT, "Already Joined"),
-    NOT_STARTED(HttpStatus.CONFLICT, " Not Start"),
-    ALREADY_FINISHED(HttpStatus.CONFLICT, " Already Finished"),
+    NOT_STARTED(HttpStatus.CONFLICT, "Not Start"),
+    ALREADY_FINISHED(HttpStatus.CONFLICT, "Already Finished"),
     DISABLED(HttpStatus.CONFLICT, "Disabled"),
-
 
     //Module
     USER("User"),
@@ -55,6 +54,9 @@ public enum CommonError implements Err {
     COURSE_CATEGORY("Course Category"),
 
     MESSAGE("Message");
+
+
+
     // 400
     // 100400
     // USER BAD REQUEST

@@ -1,9 +1,0 @@
-{
-  "urls": [
-    {
-      "url": "/v3/api-docs",
-      "name": "kms"
-    }
-  ],
-  "layout": "StandaloneLayout"
-}
