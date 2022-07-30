@@ -34,8 +34,8 @@ public class SnowflakeIdTest {
             }
         });
 
-        ids.stream().limit(10000).forEach(id -> {
-            System.out.println(ids);
+        ids.stream().limit(100).forEach(id -> {
+            System.out.println(id);
         });
 
         assertEquals(range, ids.size());
