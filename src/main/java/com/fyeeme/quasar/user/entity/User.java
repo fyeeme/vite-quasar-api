@@ -1,6 +1,6 @@
 package com.fyeeme.quasar.user.entity;
 
-import com.fyeeme.quasar.base.entity.Auditable;
+import com.fyeeme.quasar.base.entity.AuditableEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 @Getter
 @Setter
 @Schema(name = "User", description = "User Object")
-public class User extends Auditable<Long> implements UserDetails {
+public class User extends AuditableEntity<Long> implements UserDetails {
 
     private static final long serialVersionUID = 1317843457585810749L;
     @Column(unique = true)

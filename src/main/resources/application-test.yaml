@@ -8,7 +8,7 @@ spring:
 
 logging:
   level:
-    web: DEBUG
+    web: TRACE
 management:
   endpoints:
     web:
