@@ -30,6 +30,11 @@ dependencies {
     runtimeOnly 'mysql:mysql-connector-java'
     annotationProcessor 'org.projectlombok:lombok'
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+    testImplementation 'com.google.guava:guava:31.1-jre'
+    testImplementation 'org.mybatis:mybatis:3.5.10'
+    testImplementation 'org.freemarker:freemarker:2.3.31'
+    testImplementation 'tk.mybatis:mapper:3.4.2'
+    testImplementation 'org.mybatis.generator:mybatis-generator-core:1.3.5'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
 }

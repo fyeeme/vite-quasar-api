@@ -1,4 +1,4 @@
-package com.fyeeme.quasar.base.repository.suppport;
+package com.fyeeme.quasar.base.repository.support;
 
 import com.fyeeme.quasar.base.entity.QueryCondition;
 import com.fyeeme.quasar.base.enums.QueryOperationEnum;

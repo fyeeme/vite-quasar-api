@@ -1,7 +1,7 @@
 package com.fyeeme.quasar.user.service;
 
 import com.fyeeme.quasar.base.entity.QueryCondition;
-import com.fyeeme.quasar.base.repository.suppport.GenericSpecificationBuilder;
+import com.fyeeme.quasar.base.repository.support.GenericSpecificationBuilder;
 import com.fyeeme.quasar.core.exception.AssertEntity;
 import com.fyeeme.quasar.core.exception.CommonError;
 import com.fyeeme.quasar.user.entity.User;

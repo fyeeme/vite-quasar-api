@@ -5,4 +5,7 @@ import com.fyeeme.quasar.base.service.ResourceService;
 import com.fyeeme.quasar.message.entity.Message;
 
 public interface MessageService extends ResourceService<Message, QueryCondition> {
+    Message publish(Long id);
+
+    Message undoPublish(Long id);
 }
