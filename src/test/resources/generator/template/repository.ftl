@@ -1,7 +1,7 @@
-package ${basePackage}.${modelNameLowerCamel}.repository;
+package ${basePackage}.${modelName}.repository;
 
 import ${basePackage}.base.repository.ResourceRepository;
-import ${basePackage}.${modelNameLowerCamel}.entity.${modelNameUpperCamel};
+import ${basePackage}.${modelName}.entity.${modelNameUpperCamel};
 
 public interface ${modelNameUpperCamel}Repository extends ResourceRepository<${modelNameUpperCamel}> {
 

@@ -1,12 +1,16 @@
-package ${basePackage}.${modelNameLowerCamel}.service;
+package ${basePackage}.${modelName}.service;
 
 import ${basePackage}.base.entity.QueryCondition;
 import ${basePackage}.base.service.ResourceService;
-import ${basePackage}.${modelNameLowerCamel}.entity.${modelNameUpperCamel};
+import ${basePackage}.${modelName}.entity.${modelNameUpperCamel};
 
 public interface ${modelNameUpperCamel}Service extends ResourceService<${modelNameUpperCamel},QueryCondition> {
 
-    ${modelNameUpperCamel} publish(Long id);
+    default ${modelNameUpperCamel} publish(Long id){
+        return null;
+    }
 
-    ${modelNameUpperCamel} undoPublish(Long id);
+    default ${modelNameUpperCamel} undoPublish(Long id){
+        return null;
+    }
 }

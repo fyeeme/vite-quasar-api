@@ -1,8 +1,8 @@
-package ${basePackage}.${modelNameLowerCamel}.controller;
+package ${basePackage}.${modelName}.controller;
 
 import ${basePackage}.base.entity.QueryCondition;
-import ${basePackage}.${modelNameLowerCamel}.entity.${modelNameUpperCamel};
-import ${basePackage}.${modelNameLowerCamel}.service.${modelNameUpperCamel}Service;
+import ${basePackage}.${modelName}.entity.${modelNameUpperCamel};
+import ${basePackage}.${modelName}.service.${modelNameUpperCamel}Service;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;

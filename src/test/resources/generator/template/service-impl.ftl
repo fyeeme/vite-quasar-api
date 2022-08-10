@@ -1,10 +1,10 @@
-package ${basePackage}.${modelNameLowerCamel}.service;
+package ${basePackage}.${modelName}.service;
 
 import ${basePackage}.base.entity.QueryCondition;
 import ${basePackage}.base.repository.ResourceRepository;
 import ${basePackage}.base.repository.support.GenericSpecificationBuilder;
-import ${basePackage}.${modelNameLowerCamel}.repository.${modelNameUpperCamel}Repository;
-import ${basePackage}.${modelNameLowerCamel}.entity.${modelNameUpperCamel};
+import ${basePackage}.${modelName}.repository.${modelNameUpperCamel}Repository;
+import ${basePackage}.${modelName}.entity.${modelNameUpperCamel};
 
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -16,16 +16,6 @@ public class ${modelNameUpperCamel}ServiceImpl implements ${modelNameUpperCamel}
 
     public ${modelNameUpperCamel}ServiceImpl(${modelNameUpperCamel}Repository repository) {
         this.repository = repository;
-    }
-
-    @Override
-    public ${modelNameUpperCamel} publish(Long id) {
-        return null;
-    }
-
-    @Override
-    public ${modelNameUpperCamel} undoPublish(Long id) {
-        return null;
     }
 
     @Override
