@@ -1,4 +1,4 @@
-package com.fyeeme.quasar.gen.mybatis;
+package com.fyeeme.quasar.generator.mybatis;
 
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;

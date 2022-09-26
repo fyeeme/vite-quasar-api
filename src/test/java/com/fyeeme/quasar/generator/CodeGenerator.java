@@ -1,4 +1,4 @@
-package com.fyeeme.quasar.gen;
+package com.fyeeme.quasar.generator;
 
 import com.google.common.base.CaseFormat;
 import freemarker.template.TemplateExceptionHandler;

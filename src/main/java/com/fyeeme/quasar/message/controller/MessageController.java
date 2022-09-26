@@ -24,8 +24,7 @@ public class MessageController {
     @Parameter(name = "message", description = "The message data")
     @PostMapping
     public Message create(@RequestBody Message message) {
-        Message savedMessage = messageService.create(message);
-        return savedMessage;
+        return messageService.create(message);
     }
 
     @Operation(summary = "Update message by ID")
@@ -33,8 +32,7 @@ public class MessageController {
     @Parameter(name = "message", description = "The message dto")
     @PutMapping("{id}")
     public Message update(@PathVariable Long id, @RequestBody Message message) {
-        Message savedMessage = messageService.update(message);
-        return savedMessage;
+        return messageService.update(message);
     }
 
     @Operation(summary = "Get existed message by ID")
@@ -55,8 +53,7 @@ public class MessageController {
     @Parameter(name = "filter", description = "The query filter")
     @GetMapping
     public Page<Message> findAll(QueryCondition filter) {
-        Page<Message> result = messageService.findAll(filter);
-        return result;
+        return messageService.findAll(filter);
     }
 
     @Operation(summary = "Search products by query filter")
