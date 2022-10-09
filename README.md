@@ -1,15 +1,16 @@
 ## TODO
-            
+
 - [x] auditing
-- 
+-
 - [x] cors
 - [x] csrf
-- 
+-
 - [x] exception
   - [ ] 优化错误码的逻辑，解决基于数字错误码冲突的问题
 - [x] api result
-- 
+-
 - [x] generic jpa specification builder
+
   - filter white list
 
 - [ ] dto to entity
@@ -142,12 +143,12 @@ Criteria criteria = session.createCriteria(User.class);
 criteria.setFetchMode("roles", FetchMode.EAGER);
 ```
 
-
 ## spring doc
 
 disable https://petstore.swagger.io/v2/swagger.json
 
-1.  create `src/main/resources/static/swagger-config.json` and content is 
+1.  create `src/main/resources/static/swagger-config.json` and content is
+
 ```json
 {
   "urls": [
@@ -179,16 +180,18 @@ disable https://petstore.swagger.io/v2/swagger.json
     }
 ```
 
-2.1 disable  `disable-swagger-default-url`
+2.1 disable `disable-swagger-default-url`
 
 ```yaml
 disable-swagger-default-url: true
 ```
 
-
-## code generator 
+## code generator
 
 创建专有数据库用户
+
+[create mysql user doc](https://www.hostinger.com/tutorials/mysql/how-create-mysql-user-and-grant-permissions-command-line)
+
 ```sql
 CREATE USER 'quasar'@'localhost' IDENTIFIED BY 'quasar';
 
@@ -196,11 +199,13 @@ GRANT ALL PRIVILEGES ON `quasar`.* TO 'quasar'@'localhost';
 
 FLUSH PRIVILEGES;
 ```
+
 需要修改 数据配置 `com/fyeeme/quasar/generator/CodeGenerator.java`
 
 将以下配置改成实际配置
-```java 
+
+```java
     private static final String JDBC_URL = "jdbc:mysql://localhost:3306/quasar";
-    private static final String JDBC_USERNAME = "root";
-    private static final String JDBC_PASSWORD = "root";
+    private static final String JDBC_USERNAME = "quasar";
+    private static final String JDBC_PASSWORD = "quasar";
 ```
