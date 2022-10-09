@@ -32,8 +32,8 @@ public class CodeGenerator {
      *   GRANT ALL PRIVILEGES ON quasar. * TO 'root'@'localhost';
      */
     private static final String JDBC_URL = "jdbc:mysql://localhost:3306/quasar";
-    private static final String JDBC_USERNAME = "root";
-    private static final String JDBC_PASSWORD = "root";
+    private static final String JDBC_USERNAME = "quasar";
+    private static final String JDBC_PASSWORD = "quasar";
     private static final String JDBC_DIVER_CLASS_NAME = "com.mysql.cj.jdbc.Driver";
 
     private static final String PROJECT_PATH = System.getProperty("user.dir");//项目在硬盘上的基础路径

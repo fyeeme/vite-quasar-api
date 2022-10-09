@@ -188,6 +188,14 @@ disable-swagger-default-url: true
 
 ## code generator 
 
+创建专有数据库用户
+```sql
+CREATE USER 'quasar'@'localhost' IDENTIFIED BY 'quasar';
+
+GRANT ALL PRIVILEGES ON `quasar`.* TO 'quasar'@'localhost';
+
+FLUSH PRIVILEGES;
+```
 需要修改 数据配置 `com/fyeeme/quasar/generator/CodeGenerator.java`
 
 将以下配置改成实际配置
