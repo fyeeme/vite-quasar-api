@@ -31,9 +31,9 @@ public class CodeGenerator {
      *   CREATE USER 'root'@'localhost' IDENTIFIED BY 'root';
      *   GRANT ALL PRIVILEGES ON quasar. * TO 'root'@'localhost';
      */
-    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/byflow";
-    private static final String JDBC_USERNAME = "byflow";
-    private static final String JDBC_PASSWORD = "byflow";
+    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/quasar";
+    private static final String JDBC_USERNAME = "root";
+    private static final String JDBC_PASSWORD = "root";
     private static final String JDBC_DIVER_CLASS_NAME = "com.mysql.cj.jdbc.Driver";
 
     private static final String PROJECT_PATH = System.getProperty("user.dir");//项目在硬盘上的基础路径
@@ -42,10 +42,12 @@ public class CodeGenerator {
     private static final String JAVA_PATH = "/src/main/java"; //java文件路径
     private static final String RESOURCES_PATH = "/src/main/resources";//资源文件路径
 
+    public static final String CUSTOM_COMMENT_GENERATOR ="com.fyeeme.quasar.generator.mybatis.CustomCommentGenerator";
+
     public static void main(String[] args) {
         genCode(
-                 new String[]{"order", "order"},
-                 new String[]{"order_item", "order"}
+                 new String[]{"order", "order"}
+//                 new String[]{"order_item", "order"}
         );
     }
 
@@ -150,7 +152,7 @@ public class CodeGenerator {
         commentGeneratorConfiguration.addProperty(PropertyRegistry.COMMENT_GENERATOR_SUPPRESS_ALL_COMMENTS, "true");
         commentGeneratorConfiguration.addProperty(PropertyRegistry.COMMENT_GENERATOR_SUPPRESS_DATE, "true");
         commentGeneratorConfiguration.addProperty(PropertyRegistry.COMMENT_GENERATOR_ADD_REMARK_COMMENTS, "true");
-        commentGeneratorConfiguration.setConfigurationType("com.fyeeme.quasar.gen.mybatis.CustomCommentGenerator");
+        commentGeneratorConfiguration.setConfigurationType(CUSTOM_COMMENT_GENERATOR);
         context.setCommentGeneratorConfiguration(commentGeneratorConfiguration);
 
         // config model info

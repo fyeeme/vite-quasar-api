@@ -32,7 +32,7 @@ public class UserController {
     @Parameter(name = "user", description = "The user object")
     @PostMapping()
     public User create(@RequestBody User user) {
-        AssertEntity.notNull(user.getId(), User.class, CommonError.ALREADY_FINISHED);
+        AssertEntity.notNull(user.getId(), User.class, CommonError.ALREADY_EXISTED);
         return userService.create(user);
     }
 

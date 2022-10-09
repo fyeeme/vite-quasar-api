@@ -43,6 +43,7 @@ public enum CommonError implements Err {
     ALREADY_JOINED(HttpStatus.CONFLICT, "Already Joined"),
     NOT_STARTED(HttpStatus.CONFLICT, "Not Start"),
     ALREADY_FINISHED(HttpStatus.CONFLICT, "Already Finished"),
+    ALREADY_EXISTED(HttpStatus.CONFLICT, "Already Existed"),
     DISABLED(HttpStatus.CONFLICT, "Disabled"),
 
     //Module
@@ -54,7 +55,6 @@ public enum CommonError implements Err {
     COURSE_CATEGORY("Course Category"),
 
     MESSAGE("Message");
-
 
 
     // 400

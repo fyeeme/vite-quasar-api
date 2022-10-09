@@ -57,7 +57,7 @@ public class SecurityConfig {
     }
 
     /**
-     * use global cors replace @CrossOrigin on Controller level
+     * use global cross replace @CrossOrigin on Controller level
      */
     private CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();

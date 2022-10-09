@@ -10,7 +10,7 @@
 - [x] api result
 - 
 - [x] generic jpa specification builder
-  - filte whie
+  - filter white list
 
 - [ ] dto to entity
 
@@ -183,4 +183,16 @@ disable https://petstore.swagger.io/v2/swagger.json
 
 ```yaml
 disable-swagger-default-url: true
+```
+
+
+## code generator 
+
+需要修改 数据配置 `com/fyeeme/quasar/generator/CodeGenerator.java`
+
+将以下配置改成实际配置
+```java 
+    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/quasar";
+    private static final String JDBC_USERNAME = "root";
+    private static final String JDBC_PASSWORD = "root";
 ```

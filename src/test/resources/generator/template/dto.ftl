@@ -1,10 +1,9 @@
 package ${basePackage}.${modelName}.dto;
 
-import ${basePackage}.${modelName}.model.${modelNameUpperCamel};
+import ${basePackage}.${modelName}.entity.${modelNameUpperCamel};
 
 public class ${modelNameUpperCamel}Dto {
 
-    @Override
     public ${modelNameUpperCamel} toEntity() {
         return null;
     }
