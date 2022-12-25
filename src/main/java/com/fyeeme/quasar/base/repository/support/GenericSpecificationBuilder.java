@@ -7,7 +7,7 @@ import com.fyeeme.quasar.core.exception.CommonError;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.CollectionUtils;
 
-import javax.persistence.criteria.*;
+import jakarta.persistence.criteria.*;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;

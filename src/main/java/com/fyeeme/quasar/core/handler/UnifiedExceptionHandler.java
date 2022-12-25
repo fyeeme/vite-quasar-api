@@ -88,7 +88,6 @@ public class UnifiedExceptionHandler extends ResponseEntityExceptionHandler {
      * <p>
      * ServletRequestBindingException.class,
      */
-    @Override
     protected ResponseEntity<Object> handleExceptionInternal(
             Exception ex, @Nullable Object body, HttpHeaders headers, HttpStatus status, WebRequest request) {
 

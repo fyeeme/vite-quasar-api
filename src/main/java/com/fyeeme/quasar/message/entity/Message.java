@@ -5,7 +5,7 @@ import com.fyeeme.quasar.base.entity.AuditableEntity;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
+import jakarta.persistence.Entity;
 
 @Entity
 @Getter
